@@ -29,14 +29,17 @@ export class CreateElements{
 
     createCategory(categoryName,categoryDes,categoryImage){
       const p=this.createElement('p',{class:'fw-semibold'},categoryDes);
+      const self=this;
       const colDiv= this.createCard(categoryName,'categoryInfo',categoryImage,'categoryCard',p);
        colDiv.addEventListener('click',async function(){
          const category=this.children[0].children[0].alt;
-         console.log(await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`));
+        let apiMeals= await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+        displayMeals.classList.remove('d-none');
+        displayCategories.classList.add('d-none');
+        displayMeals.innerHTML=''
+        self.createMealsCards(apiMeals);
        })
       return colDiv ;
-
-
     }
 
     createCard(name,className,imgcard,cardClassName,...Rest){
@@ -53,5 +56,10 @@ export class CreateElements{
       colDiv.appendChild(Card);
       return colDiv ;
     }
-    
+
+    createMealsCards(apiMeals){
+      const dFrag = document.createDocumentFragment();
+      apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb))});
+      displayMeals.append(dFrag);
+    }    
 }
