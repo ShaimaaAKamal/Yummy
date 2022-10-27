@@ -62,13 +62,14 @@ main{
 
 
 
-.mealCard{
+.mealCard,.categoryCard{
 overflow: hidden;
 }
 .mealCard img {
     object-fit:cover;
 }
-.mealName{
+
+.mealName,.categoryInfo{
     position: absolute;
     top:0;
     left:0;
@@ -76,14 +77,25 @@ overflow: hidden;
     bottom:0;
     background-color: #f9f5f784;
     color:var(--blackColor);
-    padding:1rem;
     display: flex;
     align-items: center;
     transform: translateY(110%);
     transition: transform 1s;
 }
+.mealName{
+    padding:1rem;   
+    transform: translateY(110%);
+    transition: transform 1s;
+}
 
-.mealCard:hover .mealName{
+.categoryInfo{
+    overflow: hidden;
+    padding:1rem .8rem;
+    text-align: center;
+    flex-direction: column;
+}
+
+.mealCard:hover .mealName,.categoryCard:hover .categoryInfo{
     transform: translateY(0%);
 }
 

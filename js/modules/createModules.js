@@ -19,15 +19,34 @@ export class CreateElements{
     
      createMeal(mealName,mealImg)
     {
-       const h2=this.createElement('h2',{class:'text-center'},mealName)
-       const div=this.createElement('div',{class:"mealName rounded-3"},h2);
-       const img=this.createElement('img',{src:mealImg,alt:mealName,class:'w-100 rounded-3'});
-       const mealCard=this.createElement('div',{class:"position-relative mealCard"});
-       mealCard.appendChild(img)
-       mealCard.appendChild(div);
-       const colDiv=this.createElement('div',{class:"col-lg-3 col-md-6"});
-       colDiv.appendChild(mealCard);
-       return colDiv ;
+      return this.createCard(mealName,'mealName',mealImg,'mealCard')
+    }
+
+    createCategory(categoryName,categoryDes,categoryImage){
+      const p=this.createElement('p',{class:'fw-semibold'},categoryDes);
+      const colDiv= this.createCard(categoryName,'categoryInfo',categoryImage,'categoryCard',p);
+       colDiv.addEventListener('click',function(){
+         const category=this.children[0].children[0].alt;
+         
+       })
+      return colDiv ;
+
+
+    }
+
+    createCard(name,className,imgcard,cardClassName,...Rest){
+      const h2=this.createElement('h2',{class:'text-center'},name);
+      const div=this.createElement('div',{class:`${className} rounded-3`});
+      div.appendChild(h2);
+      if(Rest.length !== 0)
+       div.appendChild(Rest[0]);
+      const img=this.createElement('img',{src:imgcard,alt:name,class:'w-100 rounded-3'});
+      const Card=this.createElement('div',{class:`position-relative ${cardClassName}`});
+      Card.appendChild(img)
+      Card.appendChild(div);
+      const colDiv=this.createElement('div',{class:"col-lg-3 col-md-6"});
+      colDiv.appendChild(Card);
+      return colDiv ;
     }
     
 }
