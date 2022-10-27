@@ -19,7 +19,7 @@ export class CreateElements{
     
      createMeal(mealName,mealImg)
     {
-       const h2=this.createElement('h2',{},mealName)
+       const h2=this.createElement('h2',{class:'text-center'},mealName)
        const div=this.createElement('div',{class:"mealName rounded-3"},h2);
        const img=this.createElement('img',{src:mealImg,alt:mealName,class:'w-100 rounded-3'});
        const mealCard=this.createElement('div',{class:"position-relative mealCard"});
@@ -27,7 +27,7 @@ export class CreateElements{
        mealCard.appendChild(div);
        const colDiv=this.createElement('div',{class:"col-lg-3 col-md-6"});
        colDiv.appendChild(mealCard);
-       console.log(colDiv);
+       return colDiv ;
     }
     
 }
