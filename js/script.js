@@ -4,11 +4,16 @@ $('#menuIcon').click(function(){
     $('.mainNav').removeClass('d-none');
     $('#closeMenuIcon').removeClass('d-none');
     $(this).addClass('d-none');
-    $('#searchLink').delay(150).animate({'bottom':'0px','opacity':1},400);
-    $('#categoriesLink').delay(150).animate({'bottom':'0px','opacity':1},500);
-    $('#areaLink').delay(150).animate({'bottom':'0px','opacity':1},600)
-    $('#ingredientsLink').delay(150).animate({'bottom':'0px','opacity':1},700)
-    $('#contactLink').delay(150).animate({'bottom':'0px','opacity':1},800)
+    // $('#searchLink').delay(200).animate({'bottom':'0px','opacity':1},400);
+    // $('#categoriesLink').delay(300).animate({'bottom':'0px','opacity':1},500);
+    // $('#areaLink').delay(400).animate({'bottom':'0px','opacity':1},600)
+    // $('#ingredientsLink').delay(500).animate({'bottom':'0px','opacity':1},700)
+    // $('#contactLink').delay(600).animate({'bottom':'0px','opacity':1},800)
+    $('#searchLink').delay(250).animate({'bottom':'0px','opacity':1},400);
+    $('#categoriesLink').delay(400).animate({'bottom':'0px','opacity':1},400);
+    $('#areaLink').delay(600).animate({'bottom':'0px','opacity':1},400)
+    $('#ingredientsLink').delay(800).animate({'bottom':'0px','opacity':1},400)
+    $('#contactLink').delay(1000).animate({'bottom':'0px','opacity':1},400)
 
 })
 
