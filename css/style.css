@@ -19,16 +19,16 @@
     width:270px;
  }
 
-.mainNav a{
+.mainNav .navItems a{
     text-decoration:none;
     color:#F9F5F7;
     padding:.8rem 0 ;
     position: relative;
-    bottom:-23vh;
+    bottom:-24vh;
     opacity: 0;
 }
  
-.socials i {
+.socials a{
     padding-right:.5rem;
 }
 
