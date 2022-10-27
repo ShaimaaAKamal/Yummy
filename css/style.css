@@ -22,9 +22,12 @@
 .mainNav a{
     text-decoration:none;
     color:#F9F5F7;
-    padding:.6rem 0 ;
+    padding:.8rem 0 ;
+    position: relative;
+    bottom:-23vh;
+    opacity: 0;
 }
-
+ 
 .socials i {
     padding-right:.5rem;
 }
