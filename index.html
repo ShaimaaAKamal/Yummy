@@ -7,36 +7,93 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body class="bg-bk">
-          <aside class="vh-100 d-flex">
-            <nav class="mainNav bg-black h-100 py-3 ps-4 pe-1 d-flex flex-column justify-content-between d-none">
-               <div class="d-flex flex-column text-white  navItems">
-                 <a href="#" id="searchLink" >Search</a>
-                 <a href="#" id="categoriesLink">Categories</a>
-                 <a href="#" id="areaLink">Area</a>
-                 <a href="#" id="ingredientsLink">Ingredients</a>
-                 <a href="#" id="contactLink">Contact Us</a>
-               </div>
-               <div>
-                  <div class="socials">
-                     <a href="#" class="text-reset"><i class="fa-brands fa-facebook-f"></i></a>
-                     <a href="#" class="text-reset"><i class="fa-brands fa-twitter"></i></a>
-                     <a href="#" class="text-reset"><i class="fa-solid fa-globe"></i></a>
+         <div class="d-flex">
+            <aside class="vh-100 d-flex position-fixed">
+               <nav class="mainNav bg-black h-100 py-3 ps-4 pe-1 d-flex flex-column justify-content-between d-none">
+                  <div class="d-flex flex-column text-white  navItems">
+                    <a href="#" id="searchLink" >Search</a>
+                    <a href="#" id="categoriesLink">Categories</a>
+                    <a href="#" id="areaLink">Area</a>
+                    <a href="#" id="ingredientsLink">Ingredients</a>
+                    <a href="#" id="contactLink">Contact Us</a>
                   </div>
-                  <p class="copyRight py-3">Copyright Â© 2019 All Rights Reserved.</p>
+                  <div>
+                     <div class="socials">
+                        <a href="#" class="text-reset"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="text-reset"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-reset"><i class="fa-solid fa-globe"></i></a>
+                     </div>
+                     <p class="copyRight py-3">Copyright Â© 2019 All Rights Reserved.</p>
+                  </div>
+               </nav>
+                <nav class="sideNav h-100 bg-nav px-2 py-4 d-flex flex-column justify-content-between align-items-center">
+                   <img src='images/logo.png' alt='logo' class='w-100'/>
+                   <div class=text-center>
+                     <i class="fa-solid fa-bars fa-2x" id="menuIcon"></i>
+                     <i class="fa-solid fa-xmark fa-2x d-none" id="closeMenuIcon"></i>
+                   </div>
+                   <div class="d-flex flex-column  align-items-center"> 
+                     <i class="fa-solid fa-globe mb-3"></i>
+                     <i class="fa-solid fa-share-nodes"></i>
+                   </div>
+                </nav>
+             </aside>
+             <main>
+               <div class="parent mx-auto">
+                  <section id="displayReceipes" >
+                     <!-- <div class="container-fluid bg-success"> -->
+                        <div class="row gy-4 text-white">
+                           <div class="col-lg-3 col-md-6">
+                               <div class="position-relative mealCard">
+                                 <img src="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg" alt="meal1" class="w-100 rounded-3">
+                                 <div class="mealName rounded-3">
+                                    <h2>Corba</h2>
+                                 </div>
+                               </div>
+                           </div>
+                           <div class="col-lg-3 col-md-6">
+                              <div class="position-relative mealCard">
+                                <img src="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg" alt="meal1" class="w-100 rounded-3">
+                                <div class="mealName rounded-3">
+                                   <h2>Corba</h2>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-3 col-md-6">
+                           <div class="position-relative mealCard">
+                             <img src="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg" alt="meal1" class="w-100 rounded-3">
+                             <div class="mealName rounded-3">
+                                <h2>Corba</h2>
+                             </div>
+                           </div>
+                       </div>
+                       <div class="col-lg-3 col-md-6">
+                        <div class="position-relative mealCard">
+                          <img src="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg" alt="meal1" class="w-100 rounded-3">
+                          <div class="mealName rounded-3">
+                             <h2>Corba</h2>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                     <div class="position-relative mealCard">
+                       <img src="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg" alt="meal1" class="w-100 rounded-3">
+                       <div class="mealName rounded-3">
+                          <h2>Corba</h2>
+                       </div>
+                     </div>
+                 </div>
+                           
+                
+                           
+
+                           
+                        </div>
+                     <!-- </div> -->
+                   </section>
                </div>
-            </nav>
-             <nav class="sideNav h-100 bg-nav px-2 py-4 d-flex flex-column justify-content-between align-items-center">
-                <img src='images/logo.png' alt='logo' class='w-100'/>
-                <div class=text-center>
-                  <i class="fa-solid fa-bars fa-2x" id="menuIcon"></i>
-                  <i class="fa-solid fa-xmark fa-2x d-none" id="closeMenuIcon"></i>
-                </div>
-                <div class="d-flex flex-column  align-items-center"> 
-                  <i class="fa-solid fa-globe mb-3"></i>
-                  <i class="fa-solid fa-share-nodes"></i>
-                </div>
-             </nav>
-          </aside>
+             </main>
+         </div>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/jquery-3.6.1.min.js"></script>
         <script src="js/script.js" type="module"></script>
