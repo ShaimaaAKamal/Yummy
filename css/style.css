@@ -1,0 +1,15 @@
+:root{
+    --blackColor:#0D0D0D;
+    --navcolor:#F8F6F6;
+}
+
+.bg-nav{
+   background-color:var(--navcolor);
+}
+.bg-bk{
+    background-color:var(--blackColor);
+}
+
+.sideNav{
+    width:60px;
+}
