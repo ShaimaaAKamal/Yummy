@@ -9,7 +9,29 @@
 .bg-bk{
     background-color:var(--blackColor);
 }
-
+.bg-black{
+    background-color:#000;
+}
 .sideNav{
     width:60px;
+}
+.mainNav{
+    width:270px;
+ }
+
+.mainNav a{
+    text-decoration:none;
+    color:#F9F5F7;
+    padding:.6rem 0 ;
+}
+
+.socials i {
+    padding-right:.5rem;
+}
+
+.copyRight{
+    color:#999;
+    font-size:1.1rem;
+    font-weight: 300;
+    line-height: 1.8rem;
 }
