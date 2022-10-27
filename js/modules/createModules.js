@@ -1,4 +1,9 @@
+import { getData } from "./getData.js";
+const displayMeals=document.querySelector('#displayMeals');
+const displayCategories=document.querySelector("#displayCategories");
+let getDataClass=new getData();
 export class CreateElements{
+
      createElement(element,attributes,text=''){
         const elemName=document.createElement(element);
         if(Object.keys(attributes).length !== 0)
@@ -25,9 +30,9 @@ export class CreateElements{
     createCategory(categoryName,categoryDes,categoryImage){
       const p=this.createElement('p',{class:'fw-semibold'},categoryDes);
       const colDiv= this.createCard(categoryName,'categoryInfo',categoryImage,'categoryCard',p);
-       colDiv.addEventListener('click',function(){
+       colDiv.addEventListener('click',async function(){
          const category=this.children[0].children[0].alt;
-         
+         console.log(await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`));
        })
       return colDiv ;
 
