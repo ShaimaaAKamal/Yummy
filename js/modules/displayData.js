@@ -35,7 +35,6 @@ export class displayData {
             noResults.classList.add('d-none');
             this.getMealsByCategory('Chicken');
             localStorage.setItem('meals',JSON.stringify(searchMeals));
-
         }
         
     }
@@ -67,9 +66,9 @@ async  getMealsByletter(searchKey){
         lengthError.classList.remove('d-none');
      }
 
-   }
+     }
 
-    async  getCategories(element){
+async  getCategories(element){
         const dFrag = document.createDocumentFragment()
         const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/categories.php`);
         apiMeals.categories.forEach(category => dFrag.append(create.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory))
@@ -77,7 +76,7 @@ async  getMealsByletter(searchKey){
         element.append(dFrag);
     }
 
-    async  getAreas(element){
+async  getAreas(element){
         const dFrag = document.createDocumentFragment()
         const apiMealsAreas=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
         apiMealsAreas.meals.forEach(area => dFrag.append(create.createArea(area.strArea))
@@ -85,7 +84,7 @@ async  getMealsByletter(searchKey){
         element.append(dFrag);
     }
 
-    async  getIngredients(element){
+async  getIngredients(element){
         const dFrag = document.createDocumentFragment()
         const apiMealsIngredients=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`);
         apiMealsIngredients.meals.slice(0,20).forEach(ingredient => dFrag.append(create.createIngredient(ingredient))

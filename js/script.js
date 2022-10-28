@@ -15,13 +15,14 @@ const mealDetails=document.querySelector('#mealDetails');
 const menuIcon=document.querySelector('#menuIcon');
 const closeMenuIcon=document.querySelector('#closeMenuIcon');
 const lengthError=document.querySelector('#lengthError');
+const contact=document.querySelector('.contact');
 
 navAnimation();
 displayDataClass.getMealsByCategory('chicken',displayMeals);
 
 $("#categoriesLink").click(function(e){
     e.preventDefault();
-    general.hideElements([displayMeals,closeMenuIcon,mealDetails,displayAreas,displayIngredients,search,noResults]);
+    general.hideElements([displayMeals,closeMenuIcon,mealDetails,displayAreas,displayIngredients,search,noResults,contact]);
     $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
     general.showElements([displayCategories,menuIcon]);
     displayDataClass.getCategories(displayCategories);
@@ -30,7 +31,7 @@ $("#categoriesLink").click(function(e){
 $("#areaLink").click(function(e){
     e.preventDefault();
     $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
-    general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayIngredients,search,noResults]);
+    general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayIngredients,search,noResults,contact]);
     general.showElements([displayAreas,menuIcon]);
     displayDataClass.getAreas(displayAreas);
 })
@@ -38,7 +39,7 @@ $("#areaLink").click(function(e){
 $("#ingredientsLink").click(function(e){
     e.preventDefault();
     $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
-    general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayAreas,search,noResults]);
+    general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayAreas,search,noResults,contact]);
     general.showElements([displayIngredients,menuIcon]);
     displayDataClass.getIngredients(displayIngredients);
 })
@@ -46,13 +47,20 @@ $("#ingredientsLink").click(function(e){
 $("#searchLink").click(function(e){
     e.preventDefault();
     $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
-    general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayAreas,displayIngredients,noResults,lengthError]);
+    general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayAreas,displayIngredients,noResults,lengthError,contact]);
     general.showElements([search,menuIcon]);
     $('#searchByName').val("");
     $('#searchByFirstLetter').val("");
     localStorage.removeItem('meals');
 
 });
+
+$("#contactLink").click(function(e){
+    e.preventDefault();
+    $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
+    general.hideElements([displayMeals,closeMenuIcon,displayCategories,displayIngredients,mealDetails,displayAreas,search,noResults]);
+    general.showElements([contact,menuIcon]);
+})
 
 $('#searchByName').keyup(function(e){
     handleSearch(e,'name');
@@ -65,7 +73,7 @@ $('#searchByFirstLetter').keyup(function(e){
 function handleSearch(e,key){
     displayMeals.innerHTML='';
     const searchKey=e.target.value;
-    general.hideElements([displayCategories,mealDetails,displayAreas,displayIngredients]);
+    general.hideElements([displayCategories,mealDetails,displayAreas,displayIngredients,contact]);
     (key=== 'name')? displayDataClass.getMealsByName(searchKey):displayDataClass.getMealsByletter(searchKey)
 }
 
