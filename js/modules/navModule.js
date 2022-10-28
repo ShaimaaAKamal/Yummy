@@ -5,7 +5,6 @@ const navLinks=['#searchLink','#categoriesLink','#areaLink','#ingredientsLink','
 const delays=[300,500,700,900,1100];
 
 $('#menuIcon').click(function(){
-    console.log('shimaa');
     $('.mainNav').css({'width':'270px','opacity':'1'}).addClass('ps-4 pe-1');
     $('#closeMenuIcon').removeClass('d-none');
     $(this).addClass('d-none');
@@ -19,7 +18,6 @@ $('#closeMenuIcon').click(function(){
     $(this).addClass('d-none');
     navLinks.forEach(link=> $(link).css({'bottom':'-24vh','opacity':0}));
 })
-
 
 
 }

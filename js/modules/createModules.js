@@ -28,22 +28,6 @@ export class CreateElements{
         element.append(text);
      }
     
-    
-    createCategory(categoryName,categoryDes,categoryImage,categoryId){
-      const p=this.createElement('p',{class:'fw-semibold'},categoryDes);
-      const self=this;
-      const colDiv= this.createCard(categoryName,'categoryInfo',categoryImage,'categoryCard',categoryId,p);
-       colDiv.addEventListener('click',async function(){
-      const category=this.children[0].children[0].alt;
-        let apiMeals= await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-        general.showElements([displayMeals]);
-        general.hideElements([displayCategories]);
-        displayMeals.innerHTML=''
-        self.createMealsCards(apiMeals);
-       })
-      return colDiv ;
-    }
-
     createCard(name,className,imgcard,cardClassName,cardid,...Rest){
       const h2=this.createElement('h2',{class:'text-center'},name);
       const div=this.createElement('div',{class:`${className} rounded-3`});
@@ -58,13 +42,6 @@ export class CreateElements{
       colDiv.appendChild(Card);
       return colDiv ;
     }
-
-    createMealsCards(apiMeals){
-      const dFrag = document.createDocumentFragment();
-      apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
-      displayMeals.append(dFrag);
-    }  
-
     createMeal(mealName,mealImg,mealId)
     { self=this;
       const colDiv=this.createCard(mealName,'mealName',mealImg,'mealCard',mealId);
@@ -85,6 +62,41 @@ export class CreateElements{
       })
       return colDiv;
     }
+    createCategory(categoryName,categoryDes,categoryImage,categoryId){
+      const p=this.createElement('p',{class:'fw-semibold'},categoryDes);
+      const self=this;
+      const colDiv= this.createCard(categoryName,'categoryInfo',categoryImage,'categoryCard',categoryId,p);
+       colDiv.addEventListener('click',async function(){
+      const category=this.children[0].children[0].alt;
+        let apiMeals= await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+        general.showElements([displayMeals]);
+        general.hideElements([displayCategories]);
+        displayMeals.innerHTML=''
+        self.createMealsCards(apiMeals);
+       })
+      return colDiv ;
+    }
+
+   
+  
+    createArea(areaName){
+      const parentDiv=this.createElement('div',{class:'col-md-6 col-lg-3'});
+      const div =this.createElement('div',{class:'text-center'});
+      const icon =this.createElement('i',{class:'fa-solid fa-city fa-3x areaColor'});
+      const area=this.createElement('h4',{class:'mt-2'},areaName);
+      div.appendChild(icon);
+      div.appendChild(area);
+      parentDiv.appendChild(div);
+      return parentDiv;
+    }
+   
+    createMealsCards(apiMeals){
+      const dFrag = document.createDocumentFragment();
+      apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
+      displayMeals.append(dFrag);
+    }  
+
+    
 
     createMealDetails(mealName,mealImg){
       const div=this.createElement('div',{class:'col-md-3 col-xl-4'});

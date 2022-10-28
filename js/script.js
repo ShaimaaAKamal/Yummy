@@ -27,11 +27,8 @@ $("#categoriesLink").click(function(e){
 
 $("#areaLink").click(function(e){
     e.preventDefault();
-    console.log('area');
-    console.log(displayAreas);
     $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
     general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails]);
     general.showElements([displayAreas,menuIcon]);
-
-    // displayDataClass.getCategories(displayCategories);
+    displayDataClass.getAreas(displayAreas);
 })

@@ -19,4 +19,13 @@ export class displayData {
         );
         element.append(dFrag);
     }
+
+    async  getAreas(element){
+        const dFrag = document.createDocumentFragment()
+        const apiMealsAreas=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
+        apiMealsAreas.meals.forEach(area => dFrag.append(create.createArea(area.strArea))
+        );
+        element.append(dFrag);
+        // console.log(apiMealsAreas.meals);
+    }
 }
