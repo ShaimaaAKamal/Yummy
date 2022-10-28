@@ -28,7 +28,14 @@ export class CreateElements{
     
      createMeal(mealName,mealImg,mealId)
     {
-      return this.createCard(mealName,'mealName',mealImg,'mealCard',mealId)
+      const colDiv=this.createCard(mealName,'mealName',mealImg,'mealCard',mealId);
+      colDiv.addEventListener('click',async function(){
+        const mealId=this.id;
+        const response=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
+        const mealDetails=response.meals[0]
+          console.log(mealDetails);
+      })
+      return colDiv;
     }
 
     createCategory(categoryName,categoryDes,categoryImage,categoryId){
@@ -53,10 +60,10 @@ export class CreateElements{
       if(Rest.length !== 0)
        div.appendChild(Rest[0]);
       const img=this.createElement('img',{src:imgcard,alt:name,class:'w-100 rounded-3'});
-      const Card=this.createElement('div',{class:`position-relative ${cardClassName}`,id:cardid});
+      const Card=this.createElement('div',{class:`position-relative ${cardClassName}`});
       Card.appendChild(img)
       Card.appendChild(div);
-      const colDiv=this.createElement('div',{class:"col-lg-3 col-md-6"});
+      const colDiv=this.createElement('div',{class:"col-lg-3 col-md-6",id:cardid});
       colDiv.appendChild(Card);
       return colDiv ;
     }
