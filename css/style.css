@@ -37,6 +37,10 @@
     font-size: 1.1rem;
     color:#b7b7b780;
 }
+small{
+    right:0;
+    bottom:30%;
+}
 /*Nav Section*/
 aside{
     z-index:9999;

@@ -47,8 +47,10 @@
                          </div>
                      </div>
                      <div class="col-lg-6">
-                        <div >
-                           <input type="text" class="form-control  bg-transparent" id="searchByFirstLetter" placeholder="Search By First Letter...">
+                        <div class="position-relative">
+                         
+                           <input type="text" class="form-control  bg-transparent"   maxlength="1"  id="searchByFirstLetter" placeholder="Search By First Letter...">
+                           <small class="text-warning position-absolute d-none" id="lengthError">Must be only 1 char</small>
                         </div>
                      </div>
                   </div>

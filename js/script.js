@@ -14,6 +14,7 @@ const search=document.querySelector('.search');
 const mealDetails=document.querySelector('#mealDetails');
 const menuIcon=document.querySelector('#menuIcon');
 const closeMenuIcon=document.querySelector('#closeMenuIcon');
+const lengthError=document.querySelector('#lengthError');
 
 navAnimation();
 displayDataClass.getMealsByCategory('chicken',displayMeals);
@@ -45,18 +46,27 @@ $("#ingredientsLink").click(function(e){
 $("#searchLink").click(function(e){
     e.preventDefault();
     $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
-    general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayAreas,displayIngredients,noResults]);
+    general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayAreas,displayIngredients,noResults,lengthError]);
     general.showElements([search,menuIcon]);
     $('#searchByName').val("");
     $('#searchByFirstLetter').val("");
+    localStorage.removeItem('meals');
 
 });
 
 $('#searchByName').keyup(function(e){
+    handleSearch(e,'name');
+})
+$('#searchByFirstLetter').keyup(function(e){
+    noResults.classList.add('d-none');
+    handleSearch(e,'letter');
+})
+
+function handleSearch(e,key){
     displayMeals.innerHTML='';
     const searchKey=e.target.value;
     general.hideElements([displayCategories,mealDetails,displayAreas,displayIngredients]);
-    displayDataClass.getMealsByName(searchKey);
-})
+    (key=== 'name')? displayDataClass.getMealsByName(searchKey):displayDataClass.getMealsByletter(searchKey)
+}
 
 
