@@ -1,6 +1,7 @@
 import {navAnimation} from './modules/navModule.js';
 import { displayData } from './modules/displayData.js';
 
+
 const displayDataClass=new displayData();
 const displayMeals=document.querySelector('#displayMeals');
 const displayCategories=document.querySelector("#displayCategories");

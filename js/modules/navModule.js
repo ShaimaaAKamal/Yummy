@@ -1,7 +1,8 @@
 
+
 export function navAnimation(){
-const navLinks=['#searchLink','#categoriesLink','#areaLink','#ingredientsLink','#contactLink']
-const delays=[250,400,600,800,1000]
+const navLinks=['#searchLink','#categoriesLink','#areaLink','#ingredientsLink','#contactLink'];
+const delays=[250,400,600,800,1000];
 $('#menuIcon').click(function(){
     $('.mainNav').removeClass('d-none');
     $('#closeMenuIcon').removeClass('d-none');

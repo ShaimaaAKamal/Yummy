@@ -15,7 +15,7 @@ export class displayData {
     async  getCategories(element){
         const dFrag = document.createDocumentFragment()
         const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/categories.php`);
-        apiMeals.categories.forEach(category => dFrag.append(create.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb))
+        apiMeals.categories.forEach(category => dFrag.append(create.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory))
         );
         element.append(dFrag);
     }
