@@ -5,6 +5,7 @@ const displayMeals=document.querySelector('#displayMeals');
 const displayCategories=document.querySelector("#displayCategories");
 const mealDetailsElement=document.querySelector("#mealDetails");
 const displayAreas=document.querySelector("#displayAreas");
+const displayIngredients=document.querySelector('#displayIngredients');
 let getDataClass=new getData();
 const general =new General();
 
@@ -57,7 +58,7 @@ export class CreateElements{
         mealDetailsElement.appendChild(firstChild);
         mealDetailsElement.appendChild(lastChild);
         general.showElements([mealDetailsElement]);
-        general.hideElements([displayCategories,displayMeals,displayAreas]);
+        general.hideElements([displayCategories,displayMeals,displayAreas,displayIngredients]);
       })
       return colDiv;
     }
@@ -85,6 +86,23 @@ export class CreateElements{
       })
       return parentDiv;
     }
+
+
+    createIngredient(ingredient){
+      let ingredientDesc=(ingredient.strDescription)?ingredient.strDescription.split(' ').slice(0,20).join(' '):"";           
+      const parentDiv=this.createElement('div',{class:'col-md-6 col-lg-3'});
+      const div =this.createElement('div',{class:'text-center'});
+      const icon =this.createElement('i',{class:'fa-solid fa-bowl-food ingredientIcon fa-3x'});
+      const ingedientName=this.createElement('h2',{class:'mt-2'},ingredient.strIngredient);
+      const ingedrentInfo =this.createElement('p',{class:'px-2'},ingredientDesc);
+      div.appendChild(icon);
+      div.appendChild(ingedientName);
+      div.appendChild(ingedrentInfo);
+      parentDiv.appendChild(div);
+      return parentDiv;
+    }
+    
+    
 
    async createApiEvenet(url,showElement){
     let apiMeals= await getDataClass.getDatafun(url);

@@ -28,4 +28,13 @@ export class displayData {
         element.append(dFrag);
         // console.log(apiMealsAreas.meals);
     }
+
+    async  getIngredients(element){
+        const dFrag = document.createDocumentFragment()
+        const apiMealsIngredients=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`);
+        apiMealsIngredients.meals.slice(0,20).forEach(ingredient => dFrag.append(create.createIngredient(ingredient))
+        );
+        element.append(dFrag);
+      
+    }
 }
