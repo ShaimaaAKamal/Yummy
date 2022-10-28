@@ -4,6 +4,7 @@ import { General } from "./generalModules.js";
 const displayMeals=document.querySelector('#displayMeals');
 const displayCategories=document.querySelector("#displayCategories");
 const mealDetailsElement=document.querySelector("#mealDetails");
+const displayAreas=document.querySelector("#displayAreas");
 let getDataClass=new getData();
 const general =new General();
 
@@ -67,7 +68,7 @@ export class CreateElements{
     createMeal(mealName,mealImg,mealId)
     { self=this;
       const colDiv=this.createCard(mealName,'mealName',mealImg,'mealCard',mealId);
-      colDiv.addEventListener('click',async function(){
+       colDiv.addEventListener('click',async function(){
         const mealId=this.id;
         const mealPage=document.querySelector('.mealDetails');
         const response=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
@@ -79,8 +80,8 @@ export class CreateElements{
         mealDetailsElement.appendChild(firstChild);
         mealDetailsElement.appendChild(lastChild);
         mealPage.appendChild(mealDetailsElement);
-        general.showElements([mealPage]);
-        general.hideElements([displayCategories,displayMeals]);
+        general.showElements([mealDetailsElement]);
+        general.hideElements([displayCategories,displayMeals,displayAreas]);
       })
       return colDiv;
     }

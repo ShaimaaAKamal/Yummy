@@ -16,6 +16,10 @@
     background-color:#000;
 }
 
+.areaColor{
+    color:#9E3F3B;
+}
+
 /*Nav Section*/
 aside{
     z-index:9999;
