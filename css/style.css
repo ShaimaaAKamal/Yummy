@@ -20,11 +20,17 @@
 aside{
     z-index:9999;
 }
+
+
 .sideNav{
     width:60px;
 }
 .mainNav{
-    width:270px;
+    width:0px;
+    padding-left:0;
+    padding-right:0;
+    opacity:0;
+    transition:all .3s; 
  }
 
 .mainNav .navItems a{

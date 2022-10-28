@@ -81,7 +81,6 @@ export class CreateElements{
         mealPage.appendChild(mealDetailsElement);
         general.showElements([mealPage]);
         general.hideElements([displayCategories,displayMeals]);
-        console.log(mealDetailsElement);
       })
       return colDiv;
     }

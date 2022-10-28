@@ -2,9 +2,10 @@
 
 export function navAnimation(){
 const navLinks=['#searchLink','#categoriesLink','#areaLink','#ingredientsLink','#contactLink'];
-const delays=[250,400,600,800,1000];
+const delays=[300,500,700,900,1100];
+
 $('#menuIcon').click(function(){
-    $('.mainNav').removeClass('d-none');
+    $('.mainNav').css({'width':'270px','opacity':'1'}).addClass('ps-4 pe-1');
     $('#closeMenuIcon').removeClass('d-none');
     $(this).addClass('d-none');
     navLinks.forEach((link,i)=> 
@@ -12,10 +13,12 @@ $('#menuIcon').click(function(){
 })
 
 $('#closeMenuIcon').click(function(){
-    $('.mainNav').addClass('d-none');
+    $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
     $('#menuIcon').removeClass('d-none');
     $(this).addClass('d-none');
     navLinks.forEach(link=> $(link).css({'bottom':'-24vh','opacity':0}));
 })
 
 }
+
+    
