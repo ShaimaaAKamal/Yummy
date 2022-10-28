@@ -99,6 +99,10 @@ export class CreateElements{
       div.appendChild(ingedientName);
       div.appendChild(ingedrentInfo);
       parentDiv.appendChild(div);
+
+      parentDiv.addEventListener('click',async function(){
+        self.createApiEvenet(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient.strIngredient}`,displayIngredients);
+      })
       return parentDiv;
     }
     

@@ -26,7 +26,6 @@ export class displayData {
         apiMealsAreas.meals.forEach(area => dFrag.append(create.createArea(area.strArea))
         );
         element.append(dFrag);
-        // console.log(apiMealsAreas.meals);
     }
 
     async  getIngredients(element){
@@ -35,6 +34,5 @@ export class displayData {
         apiMealsIngredients.meals.slice(0,20).forEach(ingredient => dFrag.append(create.createIngredient(ingredient))
         );
         element.append(dFrag);
-      
     }
 }
