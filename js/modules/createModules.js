@@ -67,8 +67,7 @@ export class CreateElements{
       const self=this;
       const colDiv= this.createCard(categoryName,'categoryInfo',categoryImage,'categoryCard',categoryId,p);
        colDiv.addEventListener('click',async function(){
-      const category=this.children[0].children[0].alt;
-        let apiMeals= await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+        let apiMeals= await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`);
         general.showElements([displayMeals]);
         general.hideElements([displayCategories]);
         displayMeals.innerHTML=''
@@ -87,6 +86,13 @@ export class CreateElements{
       div.appendChild(icon);
       div.appendChild(area);
       parentDiv.appendChild(div);
+      parentDiv.addEventListener('click',async function(){
+        let apiMeals= await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${areaName}`);
+        general.showElements([displayMeals]);
+        general.hideElements([displayAreas]);
+        displayMeals.innerHTML=''
+        self.createMealsCards(apiMeals);
+      })
       return parentDiv;
     }
    
