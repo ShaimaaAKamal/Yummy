@@ -38,43 +38,53 @@
                    </div>
                 </nav>
              </aside>
-             <main>
-               <div class="parent mx-auto">
-                  <section class="displayMeals ">
-                        <div class="row g-4  text-white" id="displayMeals">
-                        </div>
-                   </section>
-                   <section class="displayCategories  ">
-                     <div class="row gy-4 text-white d-none" id="displayCategories">
+             <div class="main">
+               <section class="search parent mx-auto d-none">
+                  <div class="row g-4">
+                     <div class="col-lg-6">
+                        <div>
+                           <input type="text" class="form-control bg-transparent" id="searchByName" placeholder="Search By Name">
+                         </div>
                      </div>
-                   </section>
-                   <section class="displayAreas" >
-                     <div class="row gy-4 text-white d-none" id="displayAreas">
-                        <div class="col-md-6 col-lg-3">
-                           <div class="text-center">
-                              <i class="fa-solid fa-city fa-3x areaColor"></i>
-                              <h4 class="mt-2">Mexian</h4>
+                     <div class="col-lg-6">
+                        <div >
+                           <input type="text" class="form-control  bg-transparent" id="searchByFirstLetter" placeholder="Search By First Letter...">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="alert alert-light fs-6 d-none mt-3" id="noResults"></div>
+               </section>
+                <main>
+                  <div class="parent mx-auto">
+                     <section class="displayMeals ">
+                           <div class="row g-4  text-white" id="displayMeals">
+                           </div>
+                      </section>
+                      <section class="displayCategories  ">
+                        <div class="row gy-4 text-white d-none" id="displayCategories">
+                        </div>
+                      </section>
+                      <section class="displayAreas" >
+                        <div class="row gy-4 text-white d-none" id="displayAreas">
+                           <div class="col-md-6 col-lg-3">
+                              <div class="text-center">
+                                 <i class="fa-solid fa-city fa-3x areaColor"></i>
+                                 <h4 class="mt-2">Mexian</h4>
+                              </div>
                            </div>
                         </div>
-                     </div>
-                   </section>
-                   <section class="displayIngredients" >
-                     <div class="row gy-4 text-white d-none" id="displayIngredients">
-                        <!-- <div class="col-md-6 col-lg-3">
-                              <div class="text-center">
-                                 <i class="fa-solid fa-bowl-food ingredientIcon fa-3x"></i>
-                                 <h2>Chicken</h2>
-                                 <p class="ingredientDesc">The chicken is a type of domesticated fowl, a subspecies of the red junglefowl (Gallus gallus). It is one of the most common and widespread domestic animals, with a total population of more than 19 billion as of 2011. There are more chickens in the world than any other bird or domesticated fowl. Humans keep chickens primarily as a source of food (consuming both their meat and eggs) and, less commonly, as pets. Originally raised for cockfighting or for special ceremonies, chickens were not kept for food until the Hellenistic period (4th–2nd centuries BC).\r\n\r\nGenetic studies have pointed to multiple maternal origins in South Asia, Southeast Asia, and East Asia, but with the clade found in the Americas, Europe, the Middle East and Africa originating in the Indian subcontinent. From ancient India, the domesticated chicken spread to Lydia in western Asia Minor, and to Greece by the 5th century BC. Fowl had been known in Egypt since the mid-15th century BC, with the \"bird that gives birth every day\" having come to Egypt from the land between Syria and Shinar, Babylonia, according to the annals of Thutmose III.</p>
-                              </div>
-                        </div>  -->
-                     </div>
-                   </section>
-                   <section class="mealDetails">
-                     <div class="row gy-4 text-white d-none" id="mealDetails">
-                     </div> 
-                   </section>
-               </div>
-             </main>
+                      </section>
+                      <section class="displayIngredients" >
+                        <div class="row gy-4 text-white d-none" id="displayIngredients">
+                        </div>
+                      </section>
+                      <section class="mealDetails">
+                        <div class="row gy-4 text-white d-none" id="mealDetails">
+                        </div> 
+                      </section>
+                  </div>
+                </main>
+             </div>
          </div>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/jquery-3.6.1.min.js"></script>

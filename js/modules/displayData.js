@@ -12,6 +12,28 @@ export class displayData {
         create.createMealsCards(apiMeals);
     }
 
+ async  getMealsByName(searchKey){
+         const noResults=document.querySelector('#noResults');
+        if(searchKey){
+            const apiMeals=await getDataClass.getDatafun(`https://themealdb.com/api/json/v1/1/search.php?s=${searchKey}`);
+        if(apiMeals.meals)
+        {  $('#displayMeals').removeClass('d-none');
+           noResults.classList.add('d-none');
+           create.createMealsCards(apiMeals);}
+        else
+           { noResults.classList.remove('d-none');
+             $('#displayMeals').html('');
+             noResults.innerHTML=`Found 0 results for ${searchKey}`
+            }
+        }
+        else{
+            $('#displayMeals').removeClass('d-none');
+            noResults.classList.add('d-none');
+            this.getMealsByCategory('Chicken');
+        }
+        
+    }
+
     async  getCategories(element){
         const dFrag = document.createDocumentFragment()
         const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/categories.php`);

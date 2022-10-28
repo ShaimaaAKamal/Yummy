@@ -5,6 +5,7 @@ const displayMeals=document.querySelector('#displayMeals');
 const displayCategories=document.querySelector("#displayCategories");
 const mealDetailsElement=document.querySelector("#mealDetails");
 const displayAreas=document.querySelector("#displayAreas");
+const noResults=document.querySelector('#noResults');
 const displayIngredients=document.querySelector('#displayIngredients');
 let getDataClass=new getData();
 const general =new General();
@@ -58,7 +59,7 @@ export class CreateElements{
         mealDetailsElement.appendChild(firstChild);
         mealDetailsElement.appendChild(lastChild);
         general.showElements([mealDetailsElement]);
-        general.hideElements([displayCategories,displayMeals,displayAreas,displayIngredients]);
+        general.hideElements([displayCategories,displayMeals,displayAreas,displayIngredients,noResults]);
       })
       return colDiv;
     }

@@ -23,7 +23,20 @@
 .ingredientIcon{
     color:#6F9E3A;
 }
-
+.search .form-control{
+  border:none;
+  border-bottom:1px solid #b7b7b780;;
+  border-radius: 0;
+  box-shadow: none;
+  outline: 0;
+  color:#b7b7b780;
+  
+}
+.search .form-control::placeholder{
+    text-align: center;
+    font-size: 1.1rem;
+    color:#b7b7b780;
+}
 /*Nav Section*/
 aside{
     z-index:9999;
@@ -62,17 +75,22 @@ aside{
 }
 /*Nav Section*/
 
-
-main{
+.main{
     width:100vw;
-    margin-top:120px;
     margin-left:70px;
     margin-right:10px;
 }
 
-/* .parent{
-    width:100%;
-} */
+main{
+    /* width:100vw; */
+    margin-top:120px;
+    /* margin-left:70px;
+    margin-right:10px; */
+}
+
+.search{
+    margin-top:30px;
+}
 
 
 
