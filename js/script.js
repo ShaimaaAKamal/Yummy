@@ -1,9 +1,10 @@
 import {navAnimation} from './modules/navModule.js';
 import { displayData } from './modules/displayData.js';
 import { General } from './modules/generalModules.js';
-
+import { HandleContact } from './modules/contact.js';
 
 const displayDataClass=new displayData();
+const handleContact=new HandleContact();
 const general=new General();
 const displayMeals=document.querySelector('#displayMeals');
 const noResults=document.querySelector('#noResults');
@@ -60,7 +61,11 @@ $("#contactLink").click(function(e){
     $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
     general.hideElements([displayMeals,closeMenuIcon,displayCategories,displayIngredients,mealDetails,displayAreas,search,noResults]);
     general.showElements([contact,menuIcon]);
+    $('#name').keyup((e)=>handleContact.handleName(e.target)).blur(e=> e.target.style.color='#fff');
+    $('#email').keyup((e)=>handleContact.handleEmail(e.target)).blur(e=> e.target.style.color='#fff');
+
 })
+
 
 $('#searchByName').keyup(function(e){
     handleSearch(e,'name');
