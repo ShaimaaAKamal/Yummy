@@ -36,7 +36,9 @@
   outline: 0;
   color:#b7b7b780;
 }
-
+.search .form-control:focus{
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
 .contact .form-control{
     color:#b7b7b780;
     font-weight: 600;

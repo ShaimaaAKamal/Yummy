@@ -59,7 +59,6 @@ $("#searchLink").click(function(e){
     $('#searchByName').val("");
     $('#searchByFirstLetter').val("");
     localStorage.removeItem('meals');
-    // localStorage.setItem('section','search');
 });
 
 $("#contactLink").click(function(e){
@@ -73,14 +72,15 @@ $("#contactLink").click(function(e){
     $('#age').val('').css('borderColor','rgba(255, 255, 255, 0.7)').keyup((e)=>handleContact.handleAge(e.target)).blur(e=> e.target.style.color='#fff');
     $('#password').val('').css('borderColor','rgba(255, 255, 255, 0.7)').keyup((e)=>handleContact.handlePassword(e.target,'#password')).blur(e=> e.target.style.color='#fff');
     $('#repassword').val('').css('borderColor','rgba(255, 255, 255, 0.7)').keyup((e)=>handleContact.handlePassword(e.target,'#repassword')).blur(e=> e.target.style.color='#fff');
-    // localStorage.setItem('section','contact');
 
 })
 
 $('#searchByName').keyup(function(e){
+
     handleSearch(e,'name');
 })
 $('#searchByFirstLetter').keyup(function(e){
+    localStorage.setItem('section','letterSearch');
     noResults.classList.add('d-none');
     handleSearch(e,'letter');
 })
