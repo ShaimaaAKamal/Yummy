@@ -87,16 +87,6 @@ async  getCategories(element){
       
     }
 
-// async  getAreas(element){
-//         const dFrag = document.createDocumentFragment()
-//         const apiMealsAreas=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
-//             apiMealsAreas.meals.slice(0,20).forEach(area => dFrag.append(create.createArea(area.strArea))
-//             );
-//             await element.append(dFrag);
-
-//              //general.hideSpinner();
-//     }
-
 async  getAreas(element){
     const dFrag = document.createDocumentFragment();
     const displayParent=document.querySelector('.displayAreas');
@@ -109,54 +99,53 @@ async  getAreas(element){
          else{
              apiMealsAreas.meals.slice(0,20).forEach(area => dFrag.append(create.createArea(area.strArea))
               );
-              const nav=this.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements)
+              const nav=create.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements)
               await element.append(dFrag);
               element.appendChild(nav);     
          }
-         //general.hideSpinner();
 }
 
-createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements){
-    const nav= create.createElement('nav',{class:'mt-5'});
-    const ul=create.createElement('ul',{class:'pagination justify-content-center'});
-    const previousli= create.createElement('li',{class:'page-item disabled'});
-    const previouslink=create.createElement('a',{class:'page-link',href:'#'},`Previous` );
-    let x=0;
-    previousli.appendChild(previouslink);
-    ul.appendChild(previousli);
-    for(let i=0 ; i<noPages ; i++){
-        ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x));
-        x+=20; 
-    }
-    const nextli= create.createElement('li',{class:'page-item disabled'});
-    const nextlink=create.createElement('a',{class:'page-link',href:'#'},'Next');
-    nextli.appendChild(nextlink);
-    ul.appendChild(nextli)
-    nav.appendChild(ul);
-    return nav;
-}
+// createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements){
+//     const nav= create.createElement('nav',{class:'mt-5'});
+//     const ul=create.createElement('ul',{class:'pagination justify-content-center'});
+//     const previousli= create.createElement('li',{class:'page-item disabled'});
+//     const previouslink=create.createElement('a',{class:'page-link',href:'#'},`Previous` );
+//     let x=0;
+//     previousli.appendChild(previouslink);
+//     ul.appendChild(previousli);
+//     for(let i=0 ; i<noPages ; i++){
+//         ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x));
+//         x+=20; 
+//     }
+//     const nextli= create.createElement('li',{class:'page-item disabled'});
+//     const nextlink=create.createElement('a',{class:'page-link',href:'#'},'Next');
+//     nextli.appendChild(nextlink);
+//     ul.appendChild(nextli)
+//     nav.appendChild(ul);
+//     return nav;
+// }
 
 
-createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x){
-   const li= create.createElement('li',{class:'page-item'});
-   const link=create.createElement('a',{class:'page-link',href:'#',id:`page${i}`},i+1);
-   li.appendChild(link);
-   self=this
-   li.addEventListener('click',function(e){
-       element.innerHTML=''
-       const dFrag = document.createDocumentFragment();
-       if(i === noPages-1)
-      { apiMealsAreas.meals.slice(x,x+noOfLastPageElements).forEach(area => dFrag.append(create.createArea(area.strArea)));}
-       else{
-        apiMealsAreas.meals.slice(x,x+20).forEach(area => dFrag.append(create.createArea(area.strArea)));
-       }
-       const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements)
-       element.append(dFrag);
-       element.appendChild(nav);     
+// createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x){
+//    const li= create.createElement('li',{class:'page-item'});
+//    const link=create.createElement('a',{class:'page-link',href:'#',id:`page${i}`},i+1);
+//    li.appendChild(link);
+//    self=this
+//    li.addEventListener('click',function(e){
+//        element.innerHTML=''
+//        const dFrag = document.createDocumentFragment();
+//        if(i === noPages-1)
+//       { apiMealsAreas.meals.slice(x,x+noOfLastPageElements).forEach(area => dFrag.append(create.createArea(area.strArea)));}
+//        else{
+//         apiMealsAreas.meals.slice(x,x+20).forEach(area => dFrag.append(create.createArea(area.strArea)));
+//        }
+//        const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements)
+//        element.append(dFrag);
+//        element.appendChild(nav);     
 
-   })
-   return li;
-}
+//    })
+//    return li;
+// }
 
 async  getIngredients(element){
         const dFrag = document.createDocumentFragment()

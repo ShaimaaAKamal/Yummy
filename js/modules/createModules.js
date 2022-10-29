@@ -191,5 +191,46 @@ export class CreateElements{
       div.appendChild(Youtube);
       return div;
     }
-
+   
+    createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements){
+      const nav= this.createElement('nav',{class:'mt-5'});
+      const ul=this.createElement('ul',{class:'pagination justify-content-center'});
+      const previousli= this.createElement('li',{class:'page-item disabled'});
+      const previouslink=this.createElement('a',{class:'page-link',href:'#'},`Previous` );
+      let x=0;
+      previousli.appendChild(previouslink);
+      ul.appendChild(previousli);
+      for(let i=0 ; i<noPages ; i++){
+          ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x));
+          x+=20; 
+      }
+      const nextli= this.createElement('li',{class:'page-item disabled'});
+      const nextlink=this.createElement('a',{class:'page-link',href:'#'},'Next');
+      nextli.appendChild(nextlink);
+      ul.appendChild(nextli)
+      nav.appendChild(ul);
+      return nav;
+  }
+  
+  
+  createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x){
+     const li= this.createElement('li',{class:'page-item'});
+     const link=this.createElement('a',{class:'page-link',href:'#',id:`page${i}`},i+1);
+     li.appendChild(link);
+     self=this
+     li.addEventListener('click',function(e){
+         element.innerHTML=''
+         const dFrag = document.createDocumentFragment();
+         if(i === noPages-1)
+        { apiMealsAreas.meals.slice(x,x+noOfLastPageElements).forEach(area => dFrag.append(self.createArea(area.strArea)));}
+         else{
+          apiMealsAreas.meals.slice(x,x+20).forEach(area => dFrag.append(self.createArea(area.strArea)));
+         }
+         const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements)
+         element.append(dFrag);
+         element.appendChild(nav);     
+  
+     })
+     return li;
+  }
 }
