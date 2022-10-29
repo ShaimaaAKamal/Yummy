@@ -18,8 +18,8 @@ export class HandleContact{
    handleAge(input){
     this.handle(input,validate.validateAge,'#age');
    }
-   handlePassword(input){
-    this.handle(input,validate.validatePassword,'#password');
+   handlePassword(input,elementSelector){
+    this.handle(input,validate.validatePassword,elementSelector);
    }
 
    handle(input,func,selector){

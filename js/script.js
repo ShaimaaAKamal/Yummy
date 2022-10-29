@@ -65,7 +65,8 @@ $("#contactLink").click(function(e){
     $('#email').keyup((e)=>handleContact.handleEmail(e.target)).blur(e=> e.target.style.color='#fff');
     $('#phone').keyup((e)=>handleContact.handlePhone(e.target)).blur(e=> e.target.style.color='#fff');
     $('#age').keyup((e)=>handleContact.handleAge(e.target)).blur(e=> e.target.style.color='#fff');
-    $('#password').keyup((e)=>handleContact.handlePassword(e.target)).blur(e=> e.target.style.color='#fff');
+    $('#password').keyup((e)=>handleContact.handlePassword(e.target,'#password')).blur(e=> e.target.style.color='#fff');
+    $('#repassword').keyup((e)=>handleContact.handlePassword(e.target,'#repassword')).blur(e=> e.target.style.color='#fff');
 })
 
 
