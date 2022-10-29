@@ -16,13 +16,14 @@ export class General{
    showSpinner(){
       const section=(localStorage.getItem('section'))?localStorage.getItem('section'):'home';
       if(section==='home')
-         {
-         spinParent.classList.remove('spinWidth');
+         {        
          spinParent.classList.add('w-100');
+         spinParent.classList.remove('spinWidth');
          this.hideElements([contentParent]);
-           this.showElements([spinParent,main]);}
+         this.showElements([spinParent,main]);}
       else{
          spinParent.classList.add('spinWidth');
+         spinParent.classList.remove('w-100');
          this.hideElements([main])
          this.showElements([spinParent,contentParent]);
       }

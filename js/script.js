@@ -75,15 +75,11 @@ $("#contactLink").click(function(e){
 
 })
 
-$('#searchByName').keyup(function(e){
-
-    handleSearch(e,'name');
-}).blur(e=> e.target.style.color='#fff');
+$('#searchByName').keyup(function(e){handleSearch(e,'name');}).blur(e=> e.target.style.color='#fff');
 $('#searchByFirstLetter').keyup(function(e){
     localStorage.setItem('section','letterSearch');
     noResults.classList.add('d-none');
-    handleSearch(e,'letter');
-}).blur(e=> e.target.style.color='#fff');
+    handleSearch(e,'letter');}).blur(e=> e.target.style.color='#fff');
 
 function handleSearch(e,key){
     displayMeals.innerHTML='';
