@@ -15,6 +15,9 @@
 .bg-black{
     background-color:#000;
 }
+.pagination{
+    --bs-pagination-color: #9E3F3B;
+}
 
 /*Nav Section*/
 aside{
@@ -69,10 +72,12 @@ main{
     margin-top:30px;
 }
 
+.spinParent{
+    z-index:10;
+}
 .spinWidth{
     width:calc(100vw - 60px);
     margin-left:60px;
-    z-index:2;
 }
 
 .search .form-control{

@@ -5,10 +5,10 @@ export class getData{
 
     async  getDatafun(url){
         try{
+          general.showSpinner();
           const response=await fetch(url);
           const apiMeals=await response.json();
-          if(apiMeals)return apiMeals;
-          else general.showSpinner();
+          if(apiMeals){general.hideSpinner();return apiMeals}; 
         }
         catch(e){
            general.showSpinner();

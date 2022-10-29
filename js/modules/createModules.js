@@ -78,7 +78,7 @@ export class CreateElements{
       const parentDiv=this.createElement('div',{class:'col-md-6 col-lg-3'});
       const div =this.createElement('div',{class:'text-center'});
       const icon =this.createElement('i',{class:'fa-solid fa-city fa-3x areaColor'});
-      const area=this.createElement('h4',{class:'mt-2'},areaName);
+      const area=this.createElement('h2',{class:'mt-2'},areaName);
       const self=this;
       div.appendChild(icon);
       div.appendChild(area);
@@ -142,7 +142,7 @@ export class CreateElements{
       const area=this.createMealSubHeading(`Area : `,mealArea);
       const category=this.createMealSubHeading(`Category : `,mealCategory);
       const h2Rece=this.createElement('h2',{},'Receipes :');
-      const Receipes=this.createIngredients(mealIngredients);
+      const Receipes=this.createIngredientsSec(mealIngredients);
       const h2Tags=this.createElement('h2',{},'Tags :');
       const elements=[h2Instruction,pDesc,area,category,h2Rece,Receipes,h2Tags];
       if(tagName){
@@ -163,7 +163,7 @@ export class CreateElements{
       p.appendChild(spanLast);
       return p;
     }
-    createIngredients(mealIngredients){
+    createIngredientsSec(mealIngredients){
       const div=this.createElement('div',{class:'py-3'});
       mealIngredients.forEach((ingredient )=> {
         const span=this.createElement('span',{class:'alert alert-success py-2 mb-4 d-inline-block me-2'},ingredient);

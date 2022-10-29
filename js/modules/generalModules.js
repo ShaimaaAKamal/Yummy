@@ -1,6 +1,8 @@
 const spinParent=document.querySelector('.spinParent')
 const contentParent=document.querySelector('.contentParent');
 const main=document.querySelector('.main');
+let page =0; 
+let remaining;
 
 export class General{
      showElements(elements) {
@@ -30,6 +32,24 @@ export class General{
    }
    hideSpinner(){
       this.hideElements([spinParent]);
-      this.showElements([contentParent]);
+      this.showElements([contentParent,main]);
    }
+
+   getPages(num){
+      if(num >= 20){
+          page++;
+          num=num-20;
+          remaining=num;
+          this.getPages(num)
+      }
+       return {page,remaining}
+  }
+  
+  getPagesCount(num){
+    page=0;
+    let obj=this.getPages(num);
+    if(obj.remaining > 0)
+     obj.page=obj.page + 1;
+     return {noPages:obj.page,noOfLastPageElements:obj.remaining}
+  }
 }

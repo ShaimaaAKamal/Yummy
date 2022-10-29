@@ -20,6 +20,7 @@ const contact=document.querySelector('.contact');
 const checkIcons=document.querySelectorAll('.checkIcon');
 const errorMsg=document.querySelectorAll('.errorMsg');
 navAnimation();
+
 displayDataClass.getMealsByCategory('chicken',displayMeals);
 
 $("#index").click(function(e){
@@ -36,6 +37,7 @@ $("#categoriesLink").click(function(e){
     general.hideElements([displayMeals,closeMenuIcon,mealDetails,displayAreas,displayIngredients,search,noResults,contact]);
     $('aside').css({'transform':'translateX(-270px)'});
     general.showElements([displayCategories,menuIcon]);
+    displayCategories.innerHTML='';
     displayDataClass.getCategories(displayCategories);
     localStorage.setItem('section','category');
 
@@ -46,6 +48,7 @@ $("#areaLink").click(function(e){
     $('aside').css({'transform':'translateX(-270px)'});
     general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayIngredients,search,noResults,contact]);
     general.showElements([displayAreas,menuIcon]);
+    displayAreas.innerHTML=''
     displayDataClass.getAreas(displayAreas);
     localStorage.setItem('section','area');
 })
@@ -55,9 +58,9 @@ $("#ingredientsLink").click(function(e){
     $('aside').css({'transform':'translateX(-270px)'});
     general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayAreas,search,noResults,contact]);
     general.showElements([displayIngredients,menuIcon]);
+    displayIngredients.innerHTML='';
     displayDataClass.getIngredients(displayIngredients);
     localStorage.setItem('section','ingredient');
-
 })
 
 $("#searchLink").click(function(e){
