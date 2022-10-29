@@ -7,8 +7,15 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body class="bg-bk">
-         <div class="d-flex">
-            <aside class="vh-100 d-flex position-fixed ">
+         <div class="spinParent bg-bk vh-100 d-flex justify-content-center align-items-center">
+            <div class="d-flex justify-content-center">
+               <div class="spinner-border text-white" style="width: 5rem; height: 5rem; border-style: dotted;" role="status">
+                 <span class="visually-hidden">Loading...</span>
+               </div>
+             </div>
+         </div>
+         <div class="d-flex d-none contentParent">
+             <aside class="vh-100 d-flex position-fixed ">
                <nav class="mainNav bg-black h-100 py-3 d-flex flex-column justify-content-between overflow-hidden">
                   <div class="d-flex flex-column text-white  navItems">
                     <a href="#" id="searchLink" >Search</a>

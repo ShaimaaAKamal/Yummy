@@ -1,11 +1,18 @@
 
-
+import { General } from "./generalModules.js";
+const general =new General();
 export class getData{
 
     async  getDatafun(url){
-        const response=await fetch(url);
-        const apiMeals=await response.json();
-        return apiMeals;
+        try{
+          const response=await fetch(url);
+          const apiMeals=await response.json();
+          if(apiMeals)return apiMeals;
+          else general.showSpinner();
+        }
+        catch(e){
+           general.showSpinner();
+        }
        }
 
     

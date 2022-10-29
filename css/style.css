@@ -25,7 +25,7 @@
 }
 .search .form-control{
   border:none;
-  border-bottom:1px solid #b7b7b780;;
+  border-bottom:1px solid #b7b7b780;
   border-radius: 0;
   box-shadow: none;
   outline: 0;
@@ -131,13 +131,13 @@ overflow: hidden;
     color:var(--blackColor);
     display: flex;
     align-items: center;
-    transform: translateY(110%);
+    transform: translateY(200%);
     transition: transform 1s;
 }
 .mealName{
     padding:1rem;   
-    transform: translateY(110%);
-    transition: transform 1s;
+    /* transform: translateY(110%);
+    transition: transform 1s; */
 }
 
 .categoryInfo{
@@ -165,13 +165,19 @@ overflow: hidden;
 
 @media screen and (min-width:992px){
     .parent{
-        width:85%;
+        width:87%;
     }
 }
 
 @media screen and (min-width:1200px){
     .parent{
-        width:75%;
+        width:87%;
+    }
+}
+
+@media screen and (min-width:1400px){
+    .parent{
+        width:80%;
     }
 }
 

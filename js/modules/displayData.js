@@ -1,34 +1,40 @@
 
 
 import { CreateElements } from "./createModules.js"; 
+import { General } from "./generalModules.js";
 import { getData } from "./getData.js";
 const create=new CreateElements();
+const general=new General();
 const getDataClass=new getData();
+
 let searchMeals;
 
 export class displayData {
     
  async  getMealsByCategory(category){
-        const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-        create.createMealsCards(apiMeals);
-        searchMeals=apiMeals;
+            const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+            await create.createMealsCards(apiMeals); 
+            searchMeals=apiMeals;
+            general.hideSpinner();
     }
 
  async  getMealsByName(searchKey){
          const noResults=document.querySelector('#noResults');
         if(searchKey){
             const apiMeals=await getDataClass.getDatafun(`https://themealdb.com/api/json/v1/1/search.php?s=${searchKey}`);
-        if(apiMeals.meals)
-        {  $('#displayMeals').removeClass('d-none');
-           noResults.classList.add('d-none');
-           create.createMealsCards(apiMeals);
-           localStorage.setItem('meals',JSON.stringify(apiMeals));
-        }
-        else
-           { noResults.classList.remove('d-none');
-            $('#displayMeals').html('');
-             noResults.innerHTML=`Found 0 results for ${searchKey}`
-            }
+                if(apiMeals.meals)
+                {  $('#displayMeals').removeClass('d-none');
+                   noResults.classList.add('d-none');
+                 await  create.createMealsCards(apiMeals);
+                   localStorage.setItem('meals',JSON.stringify(apiMeals));
+                }
+                else
+                   { noResults.classList.remove('d-none');
+                    $('#displayMeals').html('');
+                     noResults.innerHTML=`Found 0 results for ${searchKey}`
+                    }
+                    general.hideSpinner();
+
         }
         else{
             $('#displayMeals').removeClass('d-none');
@@ -46,15 +52,18 @@ async  getMealsByletter(searchKey){
             const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchKey}`);
             if(apiMeals.meals)
             {  $('#displayMeals').removeClass('d-none');
-               create.createMealsCards(apiMeals);
+               await create.createMealsCards(apiMeals);
                localStorage.setItem('meals',JSON.stringify(apiMeals));
             }
             else
                {
                 $('#displayMeals').removeClass('d-none').html('');
                 const meals=(localStorage.getItem('meals'))?JSON.parse(localStorage.getItem('meals')):{meals:[]};
-                create.createMealsCards(meals);
+                await create.createMealsCards(meals);
                 }
+                general.hideSpinner();
+
+          
         }
         else{
             $('#displayMeals').removeClass('d-none');
@@ -71,24 +80,30 @@ async  getMealsByletter(searchKey){
 async  getCategories(element){
         const dFrag = document.createDocumentFragment()
         const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/categories.php`);
-        apiMeals.categories.forEach(category => dFrag.append(create.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory))
-        );
-        element.append(dFrag);
+            apiMeals.categories.forEach(category => dFrag.append(create.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory))
+            );
+            await element.append(dFrag);
+            general.hideSpinner();
+      
     }
 
 async  getAreas(element){
         const dFrag = document.createDocumentFragment()
         const apiMealsAreas=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
-        apiMealsAreas.meals.forEach(area => dFrag.append(create.createArea(area.strArea))
-        );
-        element.append(dFrag);
+            apiMealsAreas.meals.forEach(area => dFrag.append(create.createArea(area.strArea))
+            );
+            await element.append(dFrag);
+             general.hideSpinner();
     }
 
 async  getIngredients(element){
         const dFrag = document.createDocumentFragment()
         const apiMealsIngredients=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`);
-        apiMealsIngredients.meals.slice(0,20).forEach(ingredient => dFrag.append(create.createIngredient(ingredient))
-        );
-        element.append(dFrag);
+            apiMealsIngredients.meals.slice(0,20).forEach(ingredient => dFrag.append(create.createIngredient(ingredient))
+            );
+            await element.append(dFrag);
+            general.hideSpinner();
+       
+     
     }
 }

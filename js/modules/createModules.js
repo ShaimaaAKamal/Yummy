@@ -40,7 +40,7 @@ export class CreateElements{
       const Card=this.createElement('div',{class:`position-relative ${cardClassName}`});
       Card.appendChild(img)
       Card.appendChild(div);
-      const colDiv=this.createElement('div',{class:"col-lg-3 col-md-6",id:cardid});
+      const colDiv=this.createElement('div',{class:"col-lg-4 col-xl-3 col-md-6",id:cardid});
       colDiv.appendChild(Card);
       return colDiv ;
     }
@@ -114,13 +114,13 @@ export class CreateElements{
     general.showElements([displayMeals]);
     general.hideElements([showElement]);
     displayMeals.innerHTML=''
-    this.createMealsCards(apiMeals);
+    await this.createMealsCards(apiMeals);
    }
    
-    createMealsCards(apiMeals){
+    async createMealsCards(apiMeals){
       const dFrag = document.createDocumentFragment();
       apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
-      displayMeals.append(dFrag);
+    await  displayMeals.append(dFrag);
     }  
 
     
