@@ -18,6 +18,9 @@ export class HandleContact{
    handleAge(input){
     this.handle(input,validate.validateAge,'#age');
    }
+   handlePassword(input){
+    this.handle(input,validate.validatePassword,'#password');
+   }
 
    handle(input,func,selector){
     const siblings=$(selector).nextAll();

@@ -12,8 +12,11 @@ export class Validation{
         return regex.test(phone);
     }
     validateAge(age){
-        console.log('age')
         const regex=/^[1-9][0-9]?0?$/
         return regex.test(age);
+    }
+    validatePassword(password){
+        const regex=/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,}$/
+        return regex.test(password);
     }
 }
