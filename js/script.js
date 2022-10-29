@@ -69,7 +69,6 @@ $("#contactLink").click(function(e){
     $('#repassword').keyup((e)=>handleContact.handlePassword(e.target,'#repassword')).blur(e=> e.target.style.color='#fff');
 })
 
-
 $('#searchByName').keyup(function(e){
     handleSearch(e,'name');
 })

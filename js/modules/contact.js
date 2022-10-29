@@ -25,15 +25,27 @@ export class HandleContact{
    handle(input,func,selector){
     const siblings=$(selector).nextAll();
     if(func(input.value)){
-        general.hideElements([siblings[1],siblings[2]]);
-        general.showElements([siblings[0]]);
-         input.style.borderColor='#0f0';
+        if(selector ==='repassword' && input.value !== $('#password').val()){
+            this.displayInValidMessage(siblings,input);
+            return;
+        }
+       this. displayValidMessages(siblings,input)
     }
     else{
-        general.showElements([siblings[1],siblings[2]]);
+        this.displayInValidMessage(siblings,input);
+    }
+   }
+
+   displayInValidMessage(siblings,input){
+         general.showElements([siblings[1],siblings[2]]);
         general.hideElements([siblings[0]]);
         input.style.borderColor='#f00';
-    }
+   }
+
+   displayValidMessages(siblings,input){
+     general.hideElements([siblings[1],siblings[2]]);
+     general.showElements([siblings[0]]);
+     input.style.borderColor='#0f0';
    }
    
 }
