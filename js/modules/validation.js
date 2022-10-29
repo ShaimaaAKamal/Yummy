@@ -11,4 +11,9 @@ export class Validation{
         const regex=/^(\+2)?01(0|1|2|5)[0-9]{8}/
         return regex.test(phone);
     }
+    validateAge(age){
+        console.log('age')
+        const regex=/^[1-9][0-9]?0?$/
+        return regex.test(age);
+    }
 }

@@ -15,6 +15,9 @@ export class HandleContact{
    handlePhone(input){
     this.handle(input,validate.validatePhone,'#phone');
    }
+   handleAge(input){
+    this.handle(input,validate.validateAge,'#age');
+   }
 
    handle(input,func,selector){
     const siblings=$(selector).nextAll();

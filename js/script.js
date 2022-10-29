@@ -64,6 +64,7 @@ $("#contactLink").click(function(e){
     $('#name').keyup((e)=>handleContact.handleName(e.target)).blur(e=> e.target.style.color='#fff');
     $('#email').keyup((e)=>handleContact.handleEmail(e.target)).blur(e=> e.target.style.color='#fff');
     $('#phone').keyup((e)=>handleContact.handlePhone(e.target)).blur(e=> e.target.style.color='#fff');
+    $('#age').keyup((e)=>handleContact.handleAge(e.target)).blur(e=> e.target.style.color='#fff');
 
 })
 
