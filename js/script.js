@@ -34,7 +34,8 @@ $("#index").click(function(e){
 $("#categoriesLink").click(function(e){
     e.preventDefault();
     general.hideElements([displayMeals,closeMenuIcon,mealDetails,displayAreas,displayIngredients,search,noResults,contact]);
-    $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
+    // $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
+    $('aside').css({'transform':'translateX(-270px)'});
     general.showElements([displayCategories,menuIcon]);
     displayDataClass.getCategories(displayCategories);
     localStorage.setItem('section','category');
@@ -43,7 +44,9 @@ $("#categoriesLink").click(function(e){
 
 $("#areaLink").click(function(e){
     e.preventDefault();
-    $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
+    $('aside').css({'transform':'translateX(-270px)'});
+
+    // $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
     general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayIngredients,search,noResults,contact]);
     general.showElements([displayAreas,menuIcon]);
     displayDataClass.getAreas(displayAreas);
@@ -52,7 +55,9 @@ $("#areaLink").click(function(e){
 
 $("#ingredientsLink").click(function(e){
     e.preventDefault();
-    $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
+    $('aside').css({'transform':'translateX(-270px)'});
+
+    // $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
     general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayAreas,search,noResults,contact]);
     general.showElements([displayIngredients,menuIcon]);
     displayDataClass.getIngredients(displayIngredients);
@@ -62,7 +67,9 @@ $("#ingredientsLink").click(function(e){
 
 $("#searchLink").click(function(e){
     e.preventDefault();
-    $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
+    $('aside').css({'transform':'translateX(-270px)'});
+
+    // $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
     general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayAreas,displayIngredients,noResults,lengthError,contact]);
     general.showElements([search,menuIcon]);
     $('#searchByName').val("");
@@ -73,7 +80,9 @@ $("#searchLink").click(function(e){
 
 $("#contactLink").click(function(e){
     e.preventDefault();
-    $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
+    $('aside').css({'transform':'translateX(-270px)'});
+
+    // $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
     general.hideElements([displayMeals,closeMenuIcon,displayCategories,displayIngredients,mealDetails,displayAreas,search,noResults,...checkIcons,...errorMsg]);
     general.showElements([contact,menuIcon]);
     $('#name').val('').css('borderColor','rgba(255, 255, 255, 0.7)').keyup((e)=>handleContact.handleName(e.target)).blur(e=> e.target.style.color='#fff');

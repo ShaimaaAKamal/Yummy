@@ -16,57 +16,11 @@
     background-color:#000;
 }
 
-.areaColor{
-    color:#9E3F3B;
-}
-
-.spinWidth{
-    width:calc(100vw - 60px);
-    margin-left:60px;
-    z-index:2;
-}
-.ingredientIcon{
-    color:#6F9E3A;
-}
-.search .form-control{
-  border:none;
-  border-bottom:1px solid #b7b7b780;
-  border-radius: 0;
-  box-shadow: none;
-  outline: 0;
-  color:#b7b7b780;
-}
-.search .form-control:focus{
-    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
-}
-.contact .form-control{
-    color:#b7b7b780;
-    font-weight: 600;
-    border:none;
-    border-bottom:1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0;
-    box-shadow:0 .5rem 1rem #ffffff1a!important;
-}
-
-.form-control::placeholder{
-    text-align: center;
-    font-size: 1.1rem;
-    color:#b7b7b780;
-}
-
-
-
-.checkIcon{
-    right:10px;
-    top:2%;
-}
-small{
-    right:0;
-    bottom:30%;
-}
 /*Nav Section*/
 aside{
     z-index:9999;
+    transform: translateX(-270px);
+    transition:all .5s
 }
 
 
@@ -74,11 +28,14 @@ aside{
     width:60px;
 }
 .mainNav{
-    width:0px;
+    /* width:0; */
+    width:270px;
     padding-left:0;
     padding-right:0;
-    opacity:0;
-    transition:all .3s; 
+    /* opacity:0; */
+    opacity:1;
+
+    transition:all .5s
  }
 
 .mainNav .navItems a{
@@ -109,16 +66,63 @@ aside{
 }
 
 main{
-    /* width:100vw; */
     margin-top:120px;
-    /* margin-left:70px;
-    margin-right:10px; */
 }
 
 .search{
     margin-top:30px;
 }
 
+.spinWidth{
+    width:calc(100vw - 60px);
+    margin-left:60px;
+    z-index:2;
+}
+
+.search .form-control{
+    border:none;
+    border-bottom:1px solid #b7b7b780;
+    border-radius: 0;
+    box-shadow: none;
+    outline: 0;
+    color:#b7b7b780;
+  }
+  .search .form-control:focus{
+      box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  }
+
+.ingredientIcon{
+    color:#6F9E3A;
+}
+
+.areaColor{
+    color:#9E3F3B;
+}
+
+.contact .form-control{
+    color:#b7b7b780;
+    font-weight: 600;
+    border:none;
+    border-bottom:1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 0;
+    box-shadow:0 .5rem 1rem #ffffff1a!important;
+}
+
+.form-control::placeholder{
+    text-align: center;
+    font-size: 1.1rem;
+    color:#b7b7b780;
+    font-weight: 400;
+}
+
+.checkIcon{
+    right:10px;
+    top:2%;
+}
+small{
+    right:0;
+    bottom:30%;
+}
 
 
 .mealCard,.categoryCard{
@@ -143,8 +147,6 @@ overflow: hidden;
 }
 .mealName{
     padding:1rem;   
-    /* transform: translateY(110%);
-    transition: transform 1s; */
 }
 
 .categoryInfo{
