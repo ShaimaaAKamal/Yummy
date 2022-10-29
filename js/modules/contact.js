@@ -5,29 +5,29 @@ const general =new General();
 
 export class HandleContact{
      handleName(input){
-     const siblings=$('#name').nextAll();
-     if(validate.validatName(input.value)){
+        this.handle(input,validate.validateName,'#name');
+
+   }
+     handleEmail(input){
+        this.handle(input,validate.validateMail,'#email');
+
+   }
+   handlePhone(input){
+    this.handle(input,validate.validatePhone,'#phone');
+   }
+
+   handle(input,func,selector){
+    const siblings=$(selector).nextAll();
+    if(func(input.value)){
         general.hideElements([siblings[1],siblings[2]]);
         general.showElements([siblings[0]]);
-        input.style.borderColor='#0f0';
-     }
-     else{
-      general.showElements([siblings[1],siblings[2]]);
-      general.hideElements([siblings[0]]);
-      input.style.borderColor='#f00';
-     }
-   }
-   handleEmail(input){
-    const siblings=$('#email').nextAll();
-    if(validate.validateMail(input.value)){
-       general.hideElements([siblings[1],siblings[2]]);
-       general.showElements([siblings[0]]);
-       input.style.borderColor='#0f0';
+         input.style.borderColor='#0f0';
     }
     else{
-     general.showElements([siblings[1],siblings[2]]);
-     general.hideElements([siblings[0]]);
-     input.style.borderColor='#f00';
+        general.showElements([siblings[1],siblings[2]]);
+        general.hideElements([siblings[0]]);
+        input.style.borderColor='#f00';
     }
-  }
+   }
+   
 }

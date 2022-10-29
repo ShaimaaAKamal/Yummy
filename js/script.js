@@ -63,6 +63,7 @@ $("#contactLink").click(function(e){
     general.showElements([contact,menuIcon]);
     $('#name').keyup((e)=>handleContact.handleName(e.target)).blur(e=> e.target.style.color='#fff');
     $('#email').keyup((e)=>handleContact.handleEmail(e.target)).blur(e=> e.target.style.color='#fff');
+    $('#phone').keyup((e)=>handleContact.handlePhone(e.target)).blur(e=> e.target.style.color='#fff');
 
 })
 
