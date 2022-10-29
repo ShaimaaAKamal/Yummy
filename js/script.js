@@ -22,6 +22,15 @@ const errorMsg=document.querySelectorAll('.errorMsg');
 navAnimation();
 displayDataClass.getMealsByCategory('chicken',displayMeals);
 
+$("#index").click(function(e){
+    e.preventDefault();
+    general.hideElements([displayCategories,mealDetails,displayAreas,displayIngredients,search,noResults,contact]);
+    general.showElements([displayMeals]);
+    $('#displayMeals').html('');
+    displayDataClass.getMealsByCategory('chicken',displayMeals);
+
+})
+
 $("#categoriesLink").click(function(e){
     e.preventDefault();
     general.hideElements([displayMeals,closeMenuIcon,mealDetails,displayAreas,displayIngredients,search,noResults,contact]);

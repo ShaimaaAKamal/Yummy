@@ -60,25 +60,19 @@ async  getMealsByletter(searchKey){
                    $('#displayMeals').html('').removeClass('d-none');
                    await create.createMealsCards(apiMeals);
                 }
-                else
-                   {
+                else{
                      if(section === 'singleMeal')
                       $('#mealDetails').removeClass('d-none');
                       else $('#displayMeals').removeClass('d-none');
                     }
                     general.hideSpinner();
-    
-              
             }
             else{
                 if(section === 'singleMeal')
                 $('#mealDetails').removeClass('d-none');
                 else $('#displayMeals').removeClass('d-none');
-            }    
-            
-         }else{
-            lengthError.classList.remove('d-none');
-         }
+            }}
+            else{lengthError.classList.remove('d-none');}
     
          }
 
@@ -96,7 +90,7 @@ async  getCategories(element){
 async  getAreas(element){
         const dFrag = document.createDocumentFragment()
         const apiMealsAreas=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
-            apiMealsAreas.meals.forEach(area => dFrag.append(create.createArea(area.strArea))
+            apiMealsAreas.meals.slice(0,20).forEach(area => dFrag.append(create.createArea(area.strArea))
             );
             await element.append(dFrag);
              general.hideSpinner();
