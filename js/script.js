@@ -58,6 +58,7 @@ $("#searchLink").click(function(e){
     general.showElements([search,menuIcon]);
     $('#searchByName').val("");
     $('#searchByFirstLetter').val("");
+    $('#displayMeals').html('');
     localStorage.removeItem('meals');
 });
 
@@ -77,12 +78,10 @@ $("#contactLink").click(function(e){
 
 $('#searchByName').keyup(function(e){handleSearch(e,'name');}).blur(e=> e.target.style.color='#fff');
 $('#searchByFirstLetter').keyup(function(e){
-    localStorage.setItem('section','letterSearch');
     noResults.classList.add('d-none');
     handleSearch(e,'letter');}).blur(e=> e.target.style.color='#fff');
 
 function handleSearch(e,key){
-    displayMeals.innerHTML='';
     const searchKey=e.target.value;
     general.hideElements([displayCategories,mealDetails,displayAreas,displayIngredients,contact]);
     (key=== 'name')? displayDataClass.getMealsByName(searchKey):displayDataClass.getMealsByletter(searchKey)

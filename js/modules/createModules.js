@@ -48,6 +48,7 @@ export class CreateElements{
     { self=this;
       const colDiv=this.createCard(mealName,'mealName',mealImg,'mealCard',mealId);
        colDiv.addEventListener('click',async function(){
+        localStorage.setItem('section','singleMeal')
         const mealId=this.id;
         const response=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
         const mealDetails=response.meals[0];
@@ -120,7 +121,7 @@ export class CreateElements{
     async createMealsCards(apiMeals){
       const dFrag = document.createDocumentFragment();
       apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
-    await  displayMeals.append(dFrag);
+       await  displayMeals.append(dFrag);
     }  
 
     

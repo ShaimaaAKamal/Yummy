@@ -19,6 +19,8 @@ export class displayData {
     }
 
  async  getMealsByName(searchKey){
+  
+        $('#displayMeals').html('');
          const noResults=document.querySelector('#noResults');
         if(searchKey){
             const apiMeals=await getDataClass.getDatafun(`https://themealdb.com/api/json/v1/1/search.php?s=${searchKey}`);
@@ -44,38 +46,42 @@ export class displayData {
         }
         
     }
+
 async  getMealsByletter(searchKey){
-    const lengthError=document.querySelector('#lengthError');
-    if(searchKey.length <= 1)
-     {  lengthError.classList.add('d-none');
-        if(searchKey){
-            const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchKey}`);
-            if(apiMeals.meals)
-            {  $('#displayMeals').removeClass('d-none');
-               await create.createMealsCards(apiMeals);
-               localStorage.setItem('meals',JSON.stringify(apiMeals));
-            }
-            else
-               {
-                $('#displayMeals').removeClass('d-none').html('');
-                const meals=(localStorage.getItem('meals'))?JSON.parse(localStorage.getItem('meals')):{meals:[]};
-                await create.createMealsCards(meals);
+        const lengthError=document.querySelector('#lengthError');
+        const section=localStorage.getItem('section');
+        if(searchKey.length <= 1)
+         {  lengthError.classList.add('d-none');
+            if(searchKey){
+                const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchKey}`);
+                
+                if(apiMeals.meals)
+                { 
+                   $('#displayMeals').html('').removeClass('d-none');
+                   await create.createMealsCards(apiMeals);
                 }
-                general.hideSpinner();
+                else
+                   {
+                     if(section === 'singleMeal')
+                      $('#mealDetails').removeClass('d-none');
+                      else $('#displayMeals').removeClass('d-none');
+                    }
+                    general.hideSpinner();
+    
+              
+            }
+            else{
+                if(section === 'singleMeal')
+                $('#mealDetails').removeClass('d-none');
+                else $('#displayMeals').removeClass('d-none');
+            }    
+            
+         }else{
+            lengthError.classList.remove('d-none');
+         }
+    
+         }
 
-          
-        }
-        else{
-            $('#displayMeals').removeClass('d-none');
-            const meals=(localStorage.getItem('meals'))?JSON.parse(localStorage.getItem('meals')):{meals:[]};
-            create.createMealsCards(meals);
-        }    
-        
-     }else{
-        lengthError.classList.remove('d-none');
-     }
-
-     }
 
 async  getCategories(element){
         const dFrag = document.createDocumentFragment()
