@@ -8,7 +8,7 @@ export class Validation{
         return regex.test(mail);
     }
     validatePhone(phone){
-        const regex=/^(\+2)?01(0|1|2|5)[0-9]{8}/
+        const regex=/^(\+2)?01(0|1|2|5)[0-9]{8}$/
         return regex.test(phone);
     }
     validateAge(age){
