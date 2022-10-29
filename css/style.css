@@ -28,14 +28,10 @@ aside{
     width:60px;
 }
 .mainNav{
-    /* width:0; */
     width:270px;
     padding-left:0;
     padding-right:0;
-    /* opacity:0; */
     opacity:1;
-
-    transition:all .5s
  }
 
 .mainNav .navItems a{
