@@ -2,12 +2,12 @@ import { Validation } from "./validation.js";
 import { General } from "./generalModules.js";
 const validate=new Validation();
 const general =new General();
-let count=0
+let count=0;
 
 export class HandleContact{
      handleName(input){
         this.handle(input,validate.validateName,'#name');
-
+        
    }
      handleEmail(input){
         this.handle(input,validate.validateMail,'#email');
@@ -32,6 +32,7 @@ export class HandleContact{
       if(count !=0){
             if(password !== repassword){
                 this.displayInValidMessage(repaswordSiblings,repasswordInput);
+                this.formValidate();
                 return false;
                 }
               if(validate.validatePassword(repassword)){
@@ -40,7 +41,7 @@ export class HandleContact{
               else this.displayInValidMessage(repaswordSiblings,repasswordInput);
 
       }
-   
+      this.formValidate();
       return true;
    }
 
@@ -63,6 +64,7 @@ export class HandleContact{
           }
         this.displayInValidMessage(siblings,input);
     }
+    this.formValidate();
    }
 
    displayInValidMessage(siblings,input){
@@ -76,5 +78,13 @@ export class HandleContact{
      general.showElements([siblings[0]]);
      input.style.borderColor='#0f0';
    }
+
+   formValidate(){
+    const validateMsgs=document.querySelectorAll('.correct');
+    let validateMsgsFilter=Array.from(validateMsgs).filter(validateMsg => !validateMsg.classList.contains('d-none'));
+    if(validateMsgsFilter.length === 6) {$('.contact button').removeClass('disabled');}
+    else{$('.contact button').addClass('disabled');}
+   }
+
    
 }

@@ -85,7 +85,7 @@ $("#contactLink").click(function(e){
     $('#age').val('').css('borderColor','rgba(255, 255, 255, 0.7)').keyup((e)=>handleContact.handleAge(e.target)).blur(e=> e.target.style.color='#fff');
     $('#password').val('').css('borderColor','rgba(255, 255, 255, 0.7)').keyup((e)=>handleContact.handlePassword(e.target,'#password')).blur(e=> e.target.style.color='#fff');
     $('#repassword').val('').css('borderColor','rgba(255, 255, 255, 0.7)').keyup((e)=>handleContact.handlePassword(e.target,'#repassword')).blur(e=> e.target.style.color='#fff');
-
+    
 })
 
 $('#searchByName').keyup(function(e){handleSearch(e,'name');}).blur(e=> e.target.style.color='#fff');
