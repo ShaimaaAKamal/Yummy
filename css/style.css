@@ -20,6 +20,11 @@
     color:#9E3F3B;
 }
 
+.spinWidth{
+    width:calc(100vw - 60px);
+    margin-left:60px;
+    z-index:2;
+}
 .ingredientIcon{
     color:#6F9E3A;
 }

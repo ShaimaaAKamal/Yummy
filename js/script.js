@@ -28,6 +28,8 @@ $("#categoriesLink").click(function(e){
     $('.mainNav').css({'width':'0px','opacity':'0'}).removeClass('ps-4 pe-1');
     general.showElements([displayCategories,menuIcon]);
     displayDataClass.getCategories(displayCategories);
+    localStorage.setItem('section','category');
+
 })
 
 $("#areaLink").click(function(e){
@@ -36,6 +38,7 @@ $("#areaLink").click(function(e){
     general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayIngredients,search,noResults,contact]);
     general.showElements([displayAreas,menuIcon]);
     displayDataClass.getAreas(displayAreas);
+    localStorage.setItem('section','area');
 })
 
 $("#ingredientsLink").click(function(e){
@@ -44,6 +47,8 @@ $("#ingredientsLink").click(function(e){
     general.hideElements([displayMeals,closeMenuIcon,displayCategories,mealDetails,displayAreas,search,noResults,contact]);
     general.showElements([displayIngredients,menuIcon]);
     displayDataClass.getIngredients(displayIngredients);
+    localStorage.setItem('section','ingredient');
+
 })
 
 $("#searchLink").click(function(e){
@@ -54,7 +59,7 @@ $("#searchLink").click(function(e){
     $('#searchByName').val("");
     $('#searchByFirstLetter').val("");
     localStorage.removeItem('meals');
-
+    // localStorage.setItem('section','search');
 });
 
 $("#contactLink").click(function(e){
@@ -68,6 +73,8 @@ $("#contactLink").click(function(e){
     $('#age').val('').css('borderColor','rgba(255, 255, 255, 0.7)').keyup((e)=>handleContact.handleAge(e.target)).blur(e=> e.target.style.color='#fff');
     $('#password').val('').css('borderColor','rgba(255, 255, 255, 0.7)').keyup((e)=>handleContact.handlePassword(e.target,'#password')).blur(e=> e.target.style.color='#fff');
     $('#repassword').val('').css('borderColor','rgba(255, 255, 255, 0.7)').keyup((e)=>handleContact.handlePassword(e.target,'#repassword')).blur(e=> e.target.style.color='#fff');
+    // localStorage.setItem('section','contact');
+
 })
 
 $('#searchByName').keyup(function(e){
@@ -85,4 +92,7 @@ function handleSearch(e,key){
     (key=== 'name')? displayDataClass.getMealsByName(searchKey):displayDataClass.getMealsByletter(searchKey)
 }
 
+window.onload=function(){
+    localStorage.setItem('section','home');
+}
 

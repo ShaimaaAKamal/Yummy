@@ -1,5 +1,6 @@
 const spinParent=document.querySelector('.spinParent')
 const contentParent=document.querySelector('.contentParent');
+const main=document.querySelector('.main');
 
 export class General{
      showElements(elements) {
@@ -13,8 +14,18 @@ export class General{
         });
    }
    showSpinner(){
-      this.hideElements([contentParent]);
-      this.showElements([spinParent]);
+      const section=(localStorage.getItem('section'))?localStorage.getItem('section'):'home';
+      if(section==='home')
+         {
+         spinParent.classList.remove('spinWidth');
+         spinParent.classList.add('w-100');
+         this.hideElements([contentParent]);
+           this.showElements([spinParent,main]);}
+      else{
+         spinParent.classList.add('spinWidth');
+         this.hideElements([main])
+         this.showElements([spinParent,contentParent]);
+      }
    }
    hideSpinner(){
       this.hideElements([spinParent]);

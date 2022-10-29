@@ -11,6 +11,7 @@ export class getData{
           else general.showSpinner();
         }
         catch(e){
+          console.log('error');
            general.showSpinner();
         }
        }
