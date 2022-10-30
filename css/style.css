@@ -80,6 +80,8 @@ main{
     margin-left:60px;
 }
 
+
+
 .search .form-control{
     border:none;
     border-bottom:1px solid #b7b7b780;
@@ -176,6 +178,11 @@ overflow: hidden;
 @media screen and (min-width:992px){
     .parent{
         width:87%;
+    }
+    .navPagnation{
+        position: fixed;
+        left:0;
+        bottom:0;
     }
 }
 

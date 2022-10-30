@@ -192,8 +192,8 @@ export class CreateElements{
       return div;
     }
    
-    createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements){
-      const nav= this.createElement('nav',{class:'mt-5'});
+    createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,key){
+      const nav= this.createElement('nav',{class:'mt-5 navPagnation'});
       const ul=this.createElement('ul',{class:'pagination justify-content-center'});
       const previousli= this.createElement('li',{class:'page-item disabled'});
       const previouslink=this.createElement('a',{class:'page-link',href:'#'},`Previous` );
@@ -201,7 +201,7 @@ export class CreateElements{
       previousli.appendChild(previouslink);
       ul.appendChild(previousli);
       for(let i=0 ; i<noPages ; i++){
-          ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x));
+          ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key));
           x+=20; 
       }
       const nextli= this.createElement('li',{class:'page-item disabled'});
@@ -213,22 +213,31 @@ export class CreateElements{
   }
   
   
-  createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x){
-     const li= this.createElement('li',{class:'page-item'});
-     const link=this.createElement('a',{class:'page-link',href:'#',id:`page${i}`},i+1);
+  createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkKey){
+     const li= this.createElement('li',{class:`page-item `});
+     const link=this.createElement('a',{class:`page-link ${linkKey}`,href:'#',id:`page${i}`},i+1);
      li.appendChild(link);
      self=this
-     li.addEventListener('click',function(e){
+    //  li.addEventListener('click',function(e){
+
+     link.addEventListener('click',function(e){
+         console.log(e.target);
+         let key=(e.target.classList.contains('area') )?'area':'ingedient';
          element.innerHTML=''
          const dFrag = document.createDocumentFragment();
          if(i === noPages-1)
-        { apiMealsAreas.meals.slice(x,x+noOfLastPageElements).forEach(area => dFrag.append(self.createArea(area.strArea)));}
+        { (key === 'area') ? 
+        apiMealsAreas.meals.slice(x,x+noOfLastPageElements).forEach(area => dFrag.append(self.createArea(area.strArea))):
+        apiMealsAreas.meals.slice(x,x+noOfLastPageElements).forEach(ingredient => dFrag.append(self.createIngredient(ingredient)))}
          else{
-          apiMealsAreas.meals.slice(x,x+20).forEach(area => dFrag.append(self.createArea(area.strArea)));
+          (key === 'area') ? 
+          apiMealsAreas.meals.slice(x,x+20).forEach(area => dFrag.append(self.createArea(area.strArea))):
+          apiMealsAreas.meals.slice(x,x+20).forEach(ingredient => dFrag.append(self.createIngredient(ingredient)))
          }
-         const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements)
+         const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,linkKey)
          element.append(dFrag);
          element.appendChild(nav);     
+        // document.body.appendChild(nav);
   
      })
      return li;

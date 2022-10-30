@@ -7,15 +7,15 @@ const create=new CreateElements();
 const general=new General();
 const getDataClass=new getData();
 
-let searchMeals;
+// let searchMeals;
 
 export class displayData {
     
  async  getMealsByCategory(category){
             const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
             await create.createMealsCards(apiMeals); 
-            searchMeals=apiMeals;
-            //general.hideSpinner();
+            // searchMeals=apiMeals;
+          
     }
 
  async  getMealsByName(searchKey){
@@ -35,14 +35,13 @@ export class displayData {
                     $('#displayMeals').html('');
                      noResults.innerHTML=`Found 0 results for ${searchKey}`
                     }
-                    //general.hideSpinner();
 
         }
         else{
             $('#displayMeals').removeClass('d-none');
             noResults.classList.add('d-none');
             this.getMealsByCategory('Chicken');
-            localStorage.setItem('meals',JSON.stringify(searchMeals));
+            // localStorage.setItem('meals',JSON.stringify(searchMeals));
         }
         
     }
@@ -89,17 +88,17 @@ async  getCategories(element){
 
 async  getAreas(element){
     const dFrag = document.createDocumentFragment();
-    const displayParent=document.querySelector('.displayAreas');
+    // const displayParent=document.querySelector('.displayAreas');
       if(element.nextElementSibling) element.nextElementSibling.remove();
     const apiMealsAreas=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
     const {noPages,noOfLastPageElements}=general.getPagesCount(apiMealsAreas.meals.length);
 
         if(noPages ===0){console.log('no areas')}
-         else if(noPages === 1) { apiMealsAreas.meals.slice(0,noOfLastPageElements-1).forEach(area => dFrag.append(create.createArea(area.strArea))) }
+         else if(noPages === 1) { apiMealsAreas.meals.slice(0,noOfLastPageElements).forEach(area => dFrag.append(create.createArea(area.strArea))) }
          else{
              apiMealsAreas.meals.slice(0,20).forEach(area => dFrag.append(create.createArea(area.strArea))
               );
-              const nav=create.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements)
+              const nav=create.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,'area')
               await element.append(dFrag);
               element.appendChild(nav);     
          }
@@ -108,11 +107,19 @@ async  getAreas(element){
 async  getIngredients(element){
         const dFrag = document.createDocumentFragment()
         const apiMealsIngredients=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`);
-            apiMealsIngredients.meals.slice(0,20).forEach(ingredient => dFrag.append(create.createIngredient(ingredient))
-            );
-            await element.append(dFrag);
-            //general.hideSpinner();
-       
-     
+        const {noPages,noOfLastPageElements}=general.getPagesCount(apiMealsIngredients.meals.length);
+        console.log(noPages);
+        if(noPages ===0){console.log('no ingredients')}
+         else if(noPages === 1) { apiMealsIngredients.meals.slice(0,noOfLastPageElements).forEach(ingredient => dFrag.append(create.createIngredient(ingredient))) }
+         else{
+              apiMealsIngredients.meals.slice(0,20).forEach(ingredient => dFrag.append(create.createIngredient(ingredient)));
+              const nav=create.createPagnation(noPages,element,apiMealsIngredients,noOfLastPageElements,'ingredient')
+              await element.append(dFrag);
+              element.appendChild(nav);     
+         }
+
+            // apiMealsIngredients.meals.slice(0,20).forEach(ingredient => dFrag.append(create.createIngredient(ingredient))
+            // );
+            // await element.append(dFrag);
     }
 }
