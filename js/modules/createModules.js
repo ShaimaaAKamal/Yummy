@@ -193,43 +193,72 @@ export class CreateElements{
       div.appendChild(Youtube);
       return div;
     }
+
    
-    createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,key){
+    createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,key,activePage=0){
       const nav= this.createElement('nav',{class:'mt-5 navPagnation'});
       const ul=this.createElement('ul',{class:'pagination justify-content-center'});
-      const previousli= this.createElement('li',{class:'page-item disabled'});
-      const previouslink=this.createElement('a',{class:'page-link',href:'#'},`Previous` );
+      const previousDisabled=(activePage === 0) ? 'disabled':'';
+      const previousli= this.createElement('li',{class:`page-item ${previousDisabled}`});
+      const previouslink=this.createElement('a',{class:'page-link',href:'#'},`Previous`);
       let x=0;
       previousli.appendChild(previouslink);
       ul.appendChild(previousli);
       // for(let i=0 ; i<noPages ; i++){
         for(let i=0 ; i<2 ; i++){
-
-          ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key));
+          ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key,activePage));
           x+=20; 
       }
-      const nextli= this.createElement('li',{class:'page-item disabled'});
+      const nextDisabled=(activePage === noPages-1) ? 'disabled':'';
+      const nextli= this.createElement('li',{class:`page-item ${nextDisabled}`});
       const nextlink=this.createElement('a',{class:'page-link',href:'#'},'Next');
+      nextli.addEventListener('click',function(){
+        self.handleNextPage(noPages,key,apiMealsAreas,noOfLastPageElements,element)
+      })
       nextli.appendChild(nextlink);
       ul.appendChild(nextli)
       nav.appendChild(ul);
       return nav;
   }
+
+  handleNextPage(noPages,linkKey,apiMealsAreas,noOfLastPageElements,element){
+     const allPages=Array.from(document.querySelectorAll('.pages'));
+      const activeElementIndex=self.getActivePage(allPages);
+       const nextItemIndex =Number(activeElementIndex)+1;
+       const x=nextItemIndex*20;
+    //   if(noPages-1 >= nextItemIndex ) {
+    //   allPages[activeElementIndex].classList.remove('active')
+    //   allPages[nextItemIndex].classList.add('active');
+    //   previousli.classList.remove('disabled');
+    //   if(noPages-1 === nextItemIndex)  nextli.classList.add('disabled');
+    //   }
+    element.innerHTML=''
+    let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,nextItemIndex,noPages,x);
+   const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,linkKey,nextItemIndex)
+   if(linkKey !== 'meals'){ element.append(dFrag);} 
+   element.appendChild(nav); 
+  }
+ 
   
-  
-  createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkKey){
-     const li= this.createElement('li',{class:`page-item `});
-     const link=this.createElement('a',{class:`page-link ${linkKey}`,href:'#',id:`page${i}`},i+1);
+  createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkKey,activePage){
+    const active=(i === activePage)?'active':'';
+     const li= this.createElement('li',{class:`page-item ${active} pages`,id:i});
+     const link=this.createElement('a',{class:`page-link ${linkKey}`,href:'#'},i+1);
      li.appendChild(link);
      self=this
      link.addEventListener('click',function(e){
          element.innerHTML=''
           let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,i,noPages,x);
-         const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,linkKey)
+         const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,linkKey,i)
          if(linkKey !== 'meals'){ element.append(dFrag);} 
-         element.appendChild(nav);       
+         element.appendChild(nav);     
      })
      return li;
+  }
+
+   getActivePage(allPages){
+    let previousActivePage=allPages.find(page => page.classList.contains('active'));
+    return previousActivePage.id;
   }
 
   getKey(linkKey){
@@ -246,6 +275,7 @@ export class CreateElements{
   pagnationKey(linkKey,apiMeals,noOfLastPageElements,i,noPages,x){
     const dFrag = document.createDocumentFragment();
     let key=this.getKey(linkKey);
+   
     let noElements=(i === noPages-1)?noOfLastPageElements:20;
     switch(key){
       case 'area':
@@ -267,7 +297,7 @@ export class CreateElements{
 
 }
 
-   async getMeals(apiMeals){
+  async getMeals(apiMeals){
   const {noPages,noOfLastPageElements}=general.getPagesCount(apiMeals.meals.length);
   if(noPages ===0){console.log('no meals')}
   else if(noPages === 1) { await this.createMealsCards(apiMeals.meals.slice(0,noOfLastPageElements));     
@@ -275,8 +305,9 @@ export class CreateElements{
   else{
        await this.createMealsCards(apiMeals.meals.slice(0,20));
        let  element=document.querySelector('#displayMeals');  
-       const nav=this.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals')
-       element.appendChild(nav);     
+       const nav=this.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals',0)
+       element.appendChild(nav);
+            
   }
    }
 
