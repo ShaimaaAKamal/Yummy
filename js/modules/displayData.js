@@ -13,20 +13,19 @@ export class displayData {
     
  async  getMealsByCategory(category){
             const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-            const {noPages,noOfLastPageElements}=general.getPagesCount(apiMeals.meals.length);
-            if(noPages ===0){console.log('no meals')}
-             else if(noPages === 1) { await create.createMealsCards(apiMeals.meals.slice(0,noOfLastPageElements));     
-             }
-             else{
-                  await create.createMealsCards(apiMeals.meals.slice(0,20));
-                  let  element=document.querySelector('#displayMeals');  
-                  const nav=create.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals')
-                  element.appendChild(nav);     
-             }
-            // await create.createMealsCards(apiMeals); 
-            // searchMeals=apiMeals;
-          
+            create.getMeals(apiMeals);
     }
+
+    // const {noPages,noOfLastPageElements}=general.getPagesCount(apiMeals.meals.length);
+    // if(noPages ===0){console.log('no meals')}
+    // else if(noPages === 1) { await this.createMealsCards(apiMeals.meals.slice(0,noOfLastPageElements));     
+    // }
+    // else{
+    //      await this.createMealsCards(apiMeals.meals.slice(0,20));
+    //      let  element=document.querySelector('#displayMeals');  
+    //      const nav=this.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals')
+    //      element.appendChild(nav);     
+    // }
 
  async  getMealsByName(searchKey){
   
@@ -35,10 +34,14 @@ export class displayData {
         if(searchKey){
             const apiMeals=await getDataClass.getDatafun(`https://themealdb.com/api/json/v1/1/search.php?s=${searchKey}`);
                 if(apiMeals.meals)
-                {  $('#displayMeals').removeClass('d-none');
+                {    
+                    $('#displayMeals').removeClass('d-none');
                    noResults.classList.add('d-none');
-                 await  create.createMealsCards(apiMeals);
-                   localStorage.setItem('meals',JSON.stringify(apiMeals));
+                   create.getMeals(apiMeals);
+
+                //  await  create.createMealsCards(apiMeals);
+                    // await  create.createMealsCards(apiMeals.meals);
+                //    localStorage.setItem('meals',JSON.stringify(apiMeals));
                 }
                 else
                    { noResults.classList.remove('d-none');
@@ -67,14 +70,16 @@ async  getMealsByletter(searchKey){
                 if(apiMeals.meals)
                 { 
                    $('#displayMeals').html('').removeClass('d-none');
-                   await create.createMealsCards(apiMeals);
+                //    await create.createMealsCards(apiMeals);
+                     create.getMeals(apiMeals);
+                //  await create.createMealsCards(apiMeals.meals);
+
                 }
                 else{
                      if(section === 'singleMeal')
                       $('#mealDetails').removeClass('d-none');
                       else $('#displayMeals').removeClass('d-none');
                     }
-                    //general.hideSpinner();
             }
             else{
                 if(section === 'singleMeal')

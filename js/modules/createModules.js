@@ -114,17 +114,8 @@ export class CreateElements{
     let apiMeals= await getDataClass.getDatafun(url);
     general.showElements([displayMeals]);
     general.hideElements([showElement]);
-    displayMeals.innerHTML=''
-    const {noPages,noOfLastPageElements}=general.getPagesCount(apiMeals.meals.length);
-    if(noPages ===0){console.log('no meals')}
-     else if(noPages === 1) { await this.createMealsCards(apiMeals.meals.slice(0,noOfLastPageElements));     
-     }
-     else{
-          await this.createMealsCards(apiMeals.meals.slice(0,20));
-          let  element=document.querySelector('#displayMeals');  
-          const nav=this.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals')
-          element.appendChild(nav);     
-     }
+    displayMeals.innerHTML='';
+    this.getMeals(apiMeals);
     // await this.createMealsCards(apiMeals);
    }
    
@@ -137,7 +128,6 @@ export class CreateElements{
       async createMealsCards(apiMeals){
       const dFrag = document.createDocumentFragment();
       if(apiMeals){
-        console.log(apiMeals);
         // apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
           apiMeals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
           await  displayMeals.append(dFrag);
@@ -236,8 +226,6 @@ export class CreateElements{
      const link=this.createElement('a',{class:`page-link ${linkKey}`,href:'#',id:`page${i}`},i+1);
      li.appendChild(link);
      self=this
-    //  li.addEventListener('click',function(e){
-
      link.addEventListener('click',function(e){
          element.innerHTML=''
           let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,i,noPages,x);
@@ -281,6 +269,19 @@ export class CreateElements{
   
   return dFrag;
 
+}
+
+async getMeals(apiMeals){
+  const {noPages,noOfLastPageElements}=general.getPagesCount(apiMeals.meals.length);
+  if(noPages ===0){console.log('no meals')}
+  else if(noPages === 1) { await this.createMealsCards(apiMeals.meals.slice(0,noOfLastPageElements));     
+  }
+  else{
+       await this.createMealsCards(apiMeals.meals.slice(0,20));
+       let  element=document.querySelector('#displayMeals');  
+       const nav=this.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals')
+       element.appendChild(nav);     
+  }
 }
 
 }
