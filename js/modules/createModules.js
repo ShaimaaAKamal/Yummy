@@ -120,7 +120,7 @@ export class CreateElements{
    
  
 
-      async createMealsCards(apiMeals){
+    async createMealsCards(apiMeals){
       const dFrag = document.createDocumentFragment();
       if(apiMeals){
           apiMeals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
@@ -202,7 +202,9 @@ export class CreateElements{
       let x=0;
       previousli.appendChild(previouslink);
       ul.appendChild(previousli);
-      for(let i=0 ; i<noPages ; i++){
+      // for(let i=0 ; i<noPages ; i++){
+        for(let i=0 ; i<2 ; i++){
+
           ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key));
           x+=20; 
       }
@@ -265,7 +267,7 @@ export class CreateElements{
 
 }
 
-async getMeals(apiMeals){
+   async getMeals(apiMeals){
   const {noPages,noOfLastPageElements}=general.getPagesCount(apiMeals.meals.length);
   if(noPages ===0){console.log('no meals')}
   else if(noPages === 1) { await this.createMealsCards(apiMeals.meals.slice(0,noOfLastPageElements));     
@@ -276,6 +278,6 @@ async getMeals(apiMeals){
        const nav=this.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals')
        element.appendChild(nav);     
   }
-}
+   }
 
 }
