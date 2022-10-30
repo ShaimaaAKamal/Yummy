@@ -13,8 +13,17 @@ export class displayData {
     
  async  getMealsByCategory(category){
             const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-
-            await create.createMealsCards(apiMeals); 
+            const {noPages,noOfLastPageElements}=general.getPagesCount(apiMeals.meals.length);
+            if(noPages ===0){console.log('no meals')}
+             else if(noPages === 1) { await create.createMealsCards(apiMeals.meals.slice(0,noOfLastPageElements));     
+             }
+             else{
+                  await create.createMealsCards(apiMeals.meals.slice(0,20));
+                  let  element=document.querySelector('#displayMeals');  
+                  const nav=create.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals')
+                  element.appendChild(nav);     
+             }
+            // await create.createMealsCards(apiMeals); 
             // searchMeals=apiMeals;
           
     }
@@ -79,7 +88,7 @@ async  getMealsByletter(searchKey){
 
 async  getCategories(element){
         const dFrag = document.createDocumentFragment()
-        const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/categories.php`);
+        const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/categories.php`); 
         const {noPages,noOfLastPageElements}=general.getPagesCount(apiMeals.categories.length);
         if(noPages ===0){console.log('no categories')}
          else if(noPages === 1) {
@@ -87,7 +96,7 @@ async  getCategories(element){
              await element.append(dFrag);
             }
          else{
-            apiMeals.categories.slice(0,20).forEach(category =>  dFrag.append(create.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory)))
+              apiMeals.categories.slice(0,20).forEach(category =>  dFrag.append(create.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory)))
               const nav=create.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'category')
               await element.append(dFrag);
               element.appendChild(nav);     
@@ -121,7 +130,6 @@ async  getIngredients(element){
         const dFrag = document.createDocumentFragment()
         const apiMealsIngredients=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`);
         const {noPages,noOfLastPageElements}=general.getPagesCount(apiMealsIngredients.meals.length);
-        console.log(noPages);
         if(noPages ===0){console.log('no ingredients')}
          else if(noPages === 1) { apiMealsIngredients.meals.slice(0,noOfLastPageElements).forEach(ingredient => dFrag.append(create.createIngredient(ingredient))) ;
             await element.append(dFrag);

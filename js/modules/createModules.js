@@ -115,7 +115,17 @@ export class CreateElements{
     general.showElements([displayMeals]);
     general.hideElements([showElement]);
     displayMeals.innerHTML=''
-    await this.createMealsCards(apiMeals);
+    const {noPages,noOfLastPageElements}=general.getPagesCount(apiMeals.meals.length);
+    if(noPages ===0){console.log('no meals')}
+     else if(noPages === 1) { await this.createMealsCards(apiMeals.meals.slice(0,noOfLastPageElements));     
+     }
+     else{
+          await this.createMealsCards(apiMeals.meals.slice(0,20));
+          let  element=document.querySelector('#displayMeals');  
+          const nav=this.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals')
+          element.appendChild(nav);     
+     }
+    // await this.createMealsCards(apiMeals);
    }
    
     // async createMealsCards(apiMeals){
@@ -127,8 +137,10 @@ export class CreateElements{
       async createMealsCards(apiMeals){
       const dFrag = document.createDocumentFragment();
       if(apiMeals){
-        apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
-        await  displayMeals.append(dFrag);
+        console.log(apiMeals);
+        // apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
+          apiMeals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
+          await  displayMeals.append(dFrag);
       }
     }  
 
@@ -228,9 +240,9 @@ export class CreateElements{
 
      link.addEventListener('click',function(e){
          element.innerHTML=''
-          let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,i,noPages,x)
+          let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,i,noPages,x);
          const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,linkKey)
-         element.append(dFrag);
+         if(linkKey !== 'meals'){ element.append(dFrag);} 
          element.appendChild(nav);       
      })
      return li;
@@ -242,6 +254,7 @@ export class CreateElements{
       case 'area': key='area';break;
       case 'category': key='category';break;
       case 'ingredient': key='ingredient';break;
+      case 'meals': key='meals';break;
       default : break;
     }
     return key;
@@ -255,13 +268,17 @@ export class CreateElements{
         apiMeals.meals.slice(x,x+noElements).forEach(area => dFrag.append(this.createArea(area.strArea)));
         break;
       case 'category':
-        apiMeals.meals.slice(x,x+noElements).forEach(category =>  dFrag.append(this.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory)));
-      break;
+        apiMeals.categories.slice(x,x+noElements).forEach(category =>  dFrag.append(this.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory)));
+        break;
       case 'ingredient':
         apiMeals.meals.slice(x,x+noElements).forEach(ingredient => dFrag.append(this.createIngredient(ingredient)));
         break;
+        case 'meals':
+           this.createMealsCards(apiMeals.meals.slice(x,x+noElements));  
+          break;
       default : break;
   }
+  
   return dFrag;
 
 }
