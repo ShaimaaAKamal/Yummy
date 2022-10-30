@@ -58,23 +58,7 @@ export class General{
      return {noPages:obj.page,noOfLastPageElements:obj.remaining}
   }
    
-//    getPages(num){
-//       if(num >= 20){
-//           page++;
-//           num=num-20;
-//           remaining=num;
-//           this.getPages(num)
-//       }
-//        return {page,remaining}
-//   }
-  
-//   getPagesCount(num){
-//     page=0;
-//     let obj=this.getPages(num);
-//     if(obj.remaining > 0)
-//      obj.page=obj.page + 1;
-//      return {noPages:obj.page,noOfLastPageElements:obj.remaining}
-//   }
+
 
 
 

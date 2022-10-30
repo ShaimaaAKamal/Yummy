@@ -116,19 +116,13 @@ export class CreateElements{
     general.hideElements([showElement]);
     displayMeals.innerHTML='';
     this.getMeals(apiMeals);
-    // await this.createMealsCards(apiMeals);
    }
    
-    // async createMealsCards(apiMeals){
-    //   const dFrag = document.createDocumentFragment();
-    //   apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
-    //    await  displayMeals.append(dFrag);
-    // }  
+ 
 
       async createMealsCards(apiMeals){
       const dFrag = document.createDocumentFragment();
       if(apiMeals){
-        // apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
           apiMeals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
           await  displayMeals.append(dFrag);
       }

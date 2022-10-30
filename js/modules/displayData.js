@@ -7,7 +7,6 @@ const create=new CreateElements();
 const general=new General();
 const getDataClass=new getData();
 
-// let searchMeals;
 
 export class displayData {
     
@@ -15,17 +14,6 @@ export class displayData {
             const apiMeals=await getDataClass.getDatafun(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
             create.getMeals(apiMeals);
     }
-
-    // const {noPages,noOfLastPageElements}=general.getPagesCount(apiMeals.meals.length);
-    // if(noPages ===0){console.log('no meals')}
-    // else if(noPages === 1) { await this.createMealsCards(apiMeals.meals.slice(0,noOfLastPageElements));     
-    // }
-    // else{
-    //      await this.createMealsCards(apiMeals.meals.slice(0,20));
-    //      let  element=document.querySelector('#displayMeals');  
-    //      const nav=this.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals')
-    //      element.appendChild(nav);     
-    // }
 
  async  getMealsByName(searchKey){
   
@@ -38,10 +26,6 @@ export class displayData {
                     $('#displayMeals').removeClass('d-none');
                    noResults.classList.add('d-none');
                    create.getMeals(apiMeals);
-
-                //  await  create.createMealsCards(apiMeals);
-                    // await  create.createMealsCards(apiMeals.meals);
-                //    localStorage.setItem('meals',JSON.stringify(apiMeals));
                 }
                 else
                    { noResults.classList.remove('d-none');
@@ -54,7 +38,6 @@ export class displayData {
             $('#displayMeals').removeClass('d-none');
             noResults.classList.add('d-none');
             this.getMealsByCategory('Chicken');
-            // localStorage.setItem('meals',JSON.stringify(searchMeals));
         }
         
     }
@@ -70,9 +53,7 @@ async  getMealsByletter(searchKey){
                 if(apiMeals.meals)
                 { 
                    $('#displayMeals').html('').removeClass('d-none');
-                //    await create.createMealsCards(apiMeals);
                      create.getMeals(apiMeals);
-                //  await create.createMealsCards(apiMeals.meals);
 
                 }
                 else{
@@ -106,9 +87,6 @@ async  getCategories(element){
               await element.append(dFrag);
               element.appendChild(nav);     
          }
-            // apiMeals.categories.forEach(category => dFrag.append(create.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory))
-            // );
-            // await element.append(dFrag);
       
     }
 
@@ -146,8 +124,5 @@ async  getIngredients(element){
               element.appendChild(nav);     
          }
 
-            // apiMealsIngredients.meals.slice(0,20).forEach(ingredient => dFrag.append(create.createIngredient(ingredient))
-            // );
-            // await element.append(dFrag);
     }
 }
