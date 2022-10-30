@@ -118,13 +118,19 @@ export class CreateElements{
     await this.createMealsCards(apiMeals);
    }
    
-    async createMealsCards(apiMeals){
-      const dFrag = document.createDocumentFragment();
-      apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
-       await  displayMeals.append(dFrag);
-    }  
+    // async createMealsCards(apiMeals){
+    //   const dFrag = document.createDocumentFragment();
+    //   apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
+    //    await  displayMeals.append(dFrag);
+    // }  
 
-    
+      async createMealsCards(apiMeals){
+      const dFrag = document.createDocumentFragment();
+      if(apiMeals){
+        apiMeals.meals.forEach(meal =>{dFrag.append(this.createMeal(meal.strMeal,meal.strMealThumb,meal.idMeal))});
+        await  displayMeals.append(dFrag);
+      }
+    }  
 
     createMealDetails(mealName,mealImg){
       const div=this.createElement('div',{class:'col-md-3 col-xl-4'});
@@ -221,25 +227,43 @@ export class CreateElements{
     //  li.addEventListener('click',function(e){
 
      link.addEventListener('click',function(e){
-         console.log(e.target);
-         let key=(e.target.classList.contains('area') )?'area':'ingedient';
          element.innerHTML=''
-         const dFrag = document.createDocumentFragment();
-         if(i === noPages-1)
-        { (key === 'area') ? 
-        apiMealsAreas.meals.slice(x,x+noOfLastPageElements).forEach(area => dFrag.append(self.createArea(area.strArea))):
-        apiMealsAreas.meals.slice(x,x+noOfLastPageElements).forEach(ingredient => dFrag.append(self.createIngredient(ingredient)))}
-         else{
-          (key === 'area') ? 
-          apiMealsAreas.meals.slice(x,x+20).forEach(area => dFrag.append(self.createArea(area.strArea))):
-          apiMealsAreas.meals.slice(x,x+20).forEach(ingredient => dFrag.append(self.createIngredient(ingredient)))
-         }
+          let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,i,noPages,x)
          const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,linkKey)
          element.append(dFrag);
-         element.appendChild(nav);     
-        // document.body.appendChild(nav);
-  
+         element.appendChild(nav);       
      })
      return li;
   }
+
+  getKey(linkKey){
+    let key;
+    switch(linkKey){
+      case 'area': key='area';break;
+      case 'category': key='category';break;
+      case 'ingredient': key='ingredient';break;
+      default : break;
+    }
+    return key;
+  }
+  pagnationKey(linkKey,apiMeals,noOfLastPageElements,i,noPages,x){
+    const dFrag = document.createDocumentFragment();
+    let key=this.getKey(linkKey);
+    let noElements=(i === noPages-1)?noOfLastPageElements:20;
+    switch(key){
+      case 'area':
+        apiMeals.meals.slice(x,x+noElements).forEach(area => dFrag.append(this.createArea(area.strArea)));
+        break;
+      case 'category':
+        apiMeals.meals.slice(x,x+noElements).forEach(category =>  dFrag.append(this.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory)));
+      break;
+      case 'ingredient':
+        apiMeals.meals.slice(x,x+noElements).forEach(ingredient => dFrag.append(this.createIngredient(ingredient)));
+        break;
+      default : break;
+  }
+  return dFrag;
+
+}
+
 }
