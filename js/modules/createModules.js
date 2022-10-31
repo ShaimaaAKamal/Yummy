@@ -201,11 +201,13 @@ export class CreateElements{
       const previousDisabled=(activePage === 0) ? 'disabled':'';
       const previousli= this.createElement('li',{class:`page-item ${previousDisabled}`});
       const previouslink=this.createElement('a',{class:'page-link',href:'#'},`Previous`);
+      previouslink.addEventListener('click',function(){
+        self.handlePreviousPage(noPages,previousli,nextli,key,apiMealsAreas,noOfLastPageElements,element);
+      })
       let x=0;
       previousli.appendChild(previouslink);
       ul.appendChild(previousli);
       for(let i=0 ; i<noPages ; i++){
-        // for(let i=0 ; i<2 ; i++){
           ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key,activePage));
           x+=20; 
       }
@@ -213,7 +215,6 @@ export class CreateElements{
       const nextli= this.createElement('li',{class:`page-item ${nextDisabled}`});
       const nextlink=this.createElement('a',{class:'page-link',href:'#'},'Next');
       nextlink.addEventListener('click',function(){
-        // self.handleNextPage(noPages,key,apiMealsAreas,noOfLastPageElements,element)
         self.handleNextPage(noPages,previousli,nextli,key,apiMealsAreas,noOfLastPageElements,element);
       })
       nextli.appendChild(nextlink);
@@ -222,7 +223,6 @@ export class CreateElements{
       return nav;
   }
 
-  // handleNextPage(noPages,linkKey,apiMealsAreas,noOfLastPageElements,element){
       handleNextPage(noPages,previousli,nextli,linkKey,apiMealsAreas,noOfLastPageElements,element){
       const elementPagnation=Array.from(element.children).pop();
       const  elementUl  =elementPagnation.children[0];
@@ -245,7 +245,31 @@ export class CreateElements{
       else {
         console.log('No Active Element')
       }
-  }
+      }
+
+      handlePreviousPage(noPages,previousli,nextli,linkKey,apiMealsAreas,noOfLastPageElements,element){
+        const elementPagnation=Array.from(element.children).pop();
+        const  elementUl  =elementPagnation.children[0];
+        const  elementUlChildren  =Array.from(elementUl.children);
+        let activeElementIndex=self.getActivePage(elementUlChildren);
+        if(activeElementIndex){
+        const previousItemIndex =activeElementIndex-1;
+         const x=(previousItemIndex-1)*20;
+        if(noPages >= activeElementIndex && activeElementIndex >=1 ) {
+          elementUlChildren[activeElementIndex].classList.remove('active')
+          elementUlChildren[previousItemIndex].classList.add('active');
+          nextli.classList.remove('disabled');
+        if(activeElementIndex === 2)  previousli.classList.add('disabled');
+        }  
+           element.innerHTML=''
+          let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,previousItemIndex,noPages,x);
+          if(linkKey !== 'meals'){ element.append(dFrag);} 
+           element.appendChild(elementPagnation); 
+        }
+        else {
+          console.log('No Active Element')
+        }
+      }
 
   
  
