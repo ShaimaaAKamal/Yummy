@@ -78,7 +78,6 @@ export class General{
 
 setPrevious(previousItemIndex,activeElementIndex,noPages,elementUlChildren,nextli,previousli){
    if(noPages >= activeElementIndex && activeElementIndex >=1 ) {
-   const displayedLinks=(noPages <=2)?noPages:2;
    if(activeElementIndex > 1 && activeElementIndex <noPages){
                elementUlChildren[activeElementIndex+1].classList.add('d-none');
                elementUlChildren[activeElementIndex-1].classList.remove('d-none');

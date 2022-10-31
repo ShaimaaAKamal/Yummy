@@ -208,8 +208,8 @@ export class CreateElements{
       previousli.appendChild(previouslink);
       ul.appendChild(previousli);
       const displayedLinks=(noPages <= 2)?noPages:2;
-      for(let i=0 ; i<noPages ; i++){
-        (i < displayedLinks)?
+      for(let i=0 ; i<noPages ; i++){ 
+          (i < displayedLinks)?
           ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key,activePage,'')):
           ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key,activePage,'d-none'));
           x+=20; 
@@ -233,11 +233,36 @@ createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkK
      li.appendChild(link);
      self=this
      link.addEventListener('click',function(e){
-         element.innerHTML=''
-          let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,i,noPages,x);
-         const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,linkKey,i)
-         if(linkKey !== 'meals'){ element.append(dFrag);} 
-         element.appendChild(nav);     
+          const {elementUlChildren,elementPagnation}=getDataClass.getPagnationElement(element);
+          elementUlChildren.forEach((child,index,arr) =>{
+             if(index==0 || index == arr.length-1) return;
+             else if((i+1) === index){
+              if(child.classList.contains('d-none')) child.classList.remove('d-none');
+              if(!(child.classList.contains('active'))) child.classList.add('active');
+                    if(index === noPages){
+                      if(arr[index-1].classList.contains('d-none')) arr[index-1].classList.remove('d-none');
+                      if(arr[index-1].classList.contains('active')) arr[index-1].classList.remove('active');
+                       if(!arr[arr.length-1].classList.contains('disabled'))  arr[arr.length-1].classList.add('disabled');
+                       if(arr[0].classList.contains('disabled'))  arr[0].classList.remove('disabled');
+                    }
+                    else if(index === 1){
+                      if(arr[arr.length-1].classList.contains('disabled'))  arr[arr.length-1].classList.remove('disabled');
+                       if(!arr[0].classList.contains('disabled'))  arr[0].classList.add('disabled');
+                    }
+                    else{
+                      if(arr[0].classList.contains('disabled'))  arr[0].classList.remove('disabled');
+                      if(arr[arr.length-1].classList.contains('disabled'))  arr[arr.length-1].classList.remove('disabled');
+                    } 
+             }
+             else if((i+2) ==index && index <=noPages){
+              if(child.classList.contains('d-none')) child.classList.remove('d-none');
+              if((child.classList.contains('active'))) child.classList.remove('active');
+             }
+             else{
+              child.classList.add('d-none');
+             }
+          } )
+          self.recreatePagnation(element,linkKey,apiMealsAreas,noOfLastPageElements,i,noPages,x,elementPagnation);    
      })
      return li;
   }
