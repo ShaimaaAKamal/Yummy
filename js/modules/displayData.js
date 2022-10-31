@@ -83,7 +83,7 @@ async  getCategories(element){
             }
          else{
               apiMeals.categories.slice(0,20).forEach(category =>  dFrag.append(create.createCategory(category.strCategory,category.strCategoryDescription,category.strCategoryThumb,category.idCategory)))
-              const nav=create.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'category',0)
+              const nav=create.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'category')
               await element.append(dFrag);
               element.appendChild(nav);     
          }
@@ -103,7 +103,7 @@ async  getAreas(element){
          else{
              apiMealsAreas.meals.slice(0,20).forEach(area => dFrag.append(create.createArea(area.strArea))
               );
-              const nav=create.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,'area',0)
+              const nav=create.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,'area')
               await element.append(dFrag);
               element.appendChild(nav);     
          }
@@ -119,7 +119,7 @@ async  getIngredients(element){
         }
          else{
               apiMealsIngredients.meals.slice(0,20).forEach(ingredient => dFrag.append(create.createIngredient(ingredient)));
-              const nav=create.createPagnation(noPages,element,apiMealsIngredients,noOfLastPageElements,'ingredient',0)
+              const nav=create.createPagnation(noPages,element,apiMealsIngredients,noOfLastPageElements,'ingredient')
               await element.append(dFrag);
               element.appendChild(nav);    
          }

@@ -1,0 +1,20 @@
+  // handleNextPage(noPages,linkKey,apiMealsAreas,noOfLastPageElements,element){
+      handleNextPage(noPages,previousli,nextli,linkKey,apiMealsAreas,noOfLastPageElements,element){
+      const elementPagnation=Array.from(element.children).pop();
+      const allPages=Array.from(document.querySelectorAll('.pages'));
+      const activeElementIndex=self.getActivePage(allPages);
+      const nextItemIndex =Number(activeElementIndex)+1;
+       const x=nextItemIndex*20;
+      if(noPages-1 >= nextItemIndex ) {
+      allPages[activeElementIndex].classList.remove('active')
+      allPages[nextItemIndex].classList.add('active');
+      previousli.classList.remove('disabled');
+      if(noPages-1 === nextItemIndex)  nextli.classList.add('disabled');
+      }
+      console.log(elementPagnation.children[0].children);
+  //   element.innerHTML=''
+        let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,nextItemIndex,noPages,x);
+  //  const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,linkKey,nextItemIndex)
+        if(linkKey !== 'meals'){ element.append(dFrag);} 
+  //  element.appendChild(nav); 
+  }

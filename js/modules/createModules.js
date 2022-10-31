@@ -204,16 +204,17 @@ export class CreateElements{
       let x=0;
       previousli.appendChild(previouslink);
       ul.appendChild(previousli);
-      // for(let i=0 ; i<noPages ; i++){
-        for(let i=0 ; i<2 ; i++){
+      for(let i=0 ; i<noPages ; i++){
+        // for(let i=0 ; i<2 ; i++){
           ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key,activePage));
           x+=20; 
       }
       const nextDisabled=(activePage === noPages-1) ? 'disabled':'';
       const nextli= this.createElement('li',{class:`page-item ${nextDisabled}`});
       const nextlink=this.createElement('a',{class:'page-link',href:'#'},'Next');
-      nextli.addEventListener('click',function(){
-        self.handleNextPage(noPages,key,apiMealsAreas,noOfLastPageElements,element)
+      nextlink.addEventListener('click',function(){
+        // self.handleNextPage(noPages,key,apiMealsAreas,noOfLastPageElements,element)
+        self.handleNextPage(noPages,previousli,nextli,key,apiMealsAreas,noOfLastPageElements,element);
       })
       nextli.appendChild(nextlink);
       ul.appendChild(nextli)
@@ -221,23 +222,32 @@ export class CreateElements{
       return nav;
   }
 
-  handleNextPage(noPages,linkKey,apiMealsAreas,noOfLastPageElements,element){
-     const allPages=Array.from(document.querySelectorAll('.pages'));
-      const activeElementIndex=self.getActivePage(allPages);
-       const nextItemIndex =Number(activeElementIndex)+1;
-       const x=nextItemIndex*20;
-    //   if(noPages-1 >= nextItemIndex ) {
-    //   allPages[activeElementIndex].classList.remove('active')
-    //   allPages[nextItemIndex].classList.add('active');
-    //   previousli.classList.remove('disabled');
-    //   if(noPages-1 === nextItemIndex)  nextli.classList.add('disabled');
-    //   }
-    element.innerHTML=''
-    let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,nextItemIndex,noPages,x);
-   const nav=self.createPagnation(noPages,element,apiMealsAreas,noOfLastPageElements,linkKey,nextItemIndex)
-   if(linkKey !== 'meals'){ element.append(dFrag);} 
-   element.appendChild(nav); 
+  // handleNextPage(noPages,linkKey,apiMealsAreas,noOfLastPageElements,element){
+      handleNextPage(noPages,previousli,nextli,linkKey,apiMealsAreas,noOfLastPageElements,element){
+      const elementPagnation=Array.from(element.children).pop();
+      const  elementUl  =elementPagnation.children[0];
+      const  elementUlChildren  =Array.from(elementUl.children);
+      let activeElementIndex=self.getActivePage(elementUlChildren);
+      if(activeElementIndex){
+      const nextItemIndex =activeElementIndex+1;
+       const x=activeElementIndex*20;
+      if(noPages >= nextItemIndex ) {
+        elementUlChildren[activeElementIndex].classList.remove('active')
+        elementUlChildren[nextItemIndex].classList.add('active');
+        previousli.classList.remove('disabled');
+      if(noPages === nextItemIndex)  nextli.classList.add('disabled');
+      }  
+         element.innerHTML=''
+        let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,nextItemIndex,noPages,x);
+        if(linkKey !== 'meals'){ element.append(dFrag);} 
+      element.appendChild(elementPagnation); 
+      }
+      else {
+        console.log('No Active Element')
+      }
   }
+
+  
  
   
   createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkKey,activePage){
@@ -258,7 +268,10 @@ export class CreateElements{
 
    getActivePage(allPages){
     let previousActivePage=allPages.find(page => page.classList.contains('active'));
-    return previousActivePage.id;
+    if(previousActivePage !== undefined)
+    return Number(previousActivePage.id)+1;
+    else 
+    return false;
   }
 
   getKey(linkKey){
@@ -275,8 +288,7 @@ export class CreateElements{
   pagnationKey(linkKey,apiMeals,noOfLastPageElements,i,noPages,x){
     const dFrag = document.createDocumentFragment();
     let key=this.getKey(linkKey);
-   
-    let noElements=(i === noPages-1)?noOfLastPageElements:20;
+    let noElements=(i === noPages)?noOfLastPageElements:20;
     switch(key){
       case 'area':
         apiMeals.meals.slice(x,x+noElements).forEach(area => dFrag.append(this.createArea(area.strArea)));
@@ -292,9 +304,7 @@ export class CreateElements{
           break;
       default : break;
   }
-  
   return dFrag;
-
 }
 
   async getMeals(apiMeals){
@@ -306,8 +316,7 @@ export class CreateElements{
        await this.createMealsCards(apiMeals.meals.slice(0,20));
        let  element=document.querySelector('#displayMeals');  
        const nav=this.createPagnation(noPages,element,apiMeals,noOfLastPageElements,'meals',0)
-       element.appendChild(nav);
-            
+       element.appendChild(nav);           
   }
    }
 
