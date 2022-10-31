@@ -199,8 +199,8 @@ export class CreateElements{
       const nav= this.createElement('nav',{class:'mt-5 navPagnation'});
       const ul=this.createElement('ul',{class:'pagination justify-content-center'});
       const previousDisabled=(activePage === 0) ? 'disabled':'';
-      const previousli= this.createElement('li',{class:`page-item ${previousDisabled}`});
-      const previouslink=this.createElement('a',{class:'page-link',href:'#'},`Previous`);
+      const previousli= this.createElement('li',{class:`page-item  ${previousDisabled}`});
+      const previouslink=this.createElement('a',{class:'page-link previous',href:'#'},`Previous`);
       previouslink.addEventListener('click',function(){
         self.handlePreviousPage(noPages,previousli,nextli,key,apiMealsAreas,noOfLastPageElements,element);
       })
@@ -213,7 +213,7 @@ export class CreateElements{
       }
       const nextDisabled=(activePage === noPages-1) ? 'disabled':'';
       const nextli= this.createElement('li',{class:`page-item ${nextDisabled}`});
-      const nextlink=this.createElement('a',{class:'page-link',href:'#'},'Next');
+      const nextlink=this.createElement('a',{class:'page-link next',href:'#'},'Next');
       nextlink.addEventListener('click',function(){
         self.handleNextPage(noPages,previousli,nextli,key,apiMealsAreas,noOfLastPageElements,element);
       })

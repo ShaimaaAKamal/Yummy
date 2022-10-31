@@ -163,6 +163,16 @@ overflow: hidden;
     transform: translateY(0%);
 }
 
+.active>.page-link, .page-link.active {
+    color:#fff;
+    background-color: #9E3F3B;
+    border-color: #9E3F3B;
+}
+
+.previous:hover,.next:hover {
+    color: #9E3F3B;;
+}
+
 @media screen and (min-width:576px){
     .parent{
         width:75%;
