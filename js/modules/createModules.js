@@ -260,9 +260,11 @@ createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkK
              }
              else{
               child.classList.add('d-none');
+              if((child.classList.contains('active'))) child.classList.remove('active');
              }
           } )
-          self.recreatePagnation(element,linkKey,apiMealsAreas,noOfLastPageElements,i,noPages,x,elementPagnation);    
+          self.recreatePagnation(element,linkKey,apiMealsAreas,noOfLastPageElements,i,noPages,x,elementPagnation);  
+  
      })
      return li;
   }
@@ -274,6 +276,7 @@ createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkK
        const x=activeElementIndex*20;
        elementUlChildren=general.setNext(nextItemIndex,activeElementIndex,noPages,elementUlChildren,nextli,previousli)
        this.recreatePagnation(element,linkKey,apiMealsAreas,noOfLastPageElements,nextItemIndex,noPages,x,elementPagnation);
+
       }
       else {
         console.log('No Active Element')
