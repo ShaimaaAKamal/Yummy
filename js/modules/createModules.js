@@ -223,58 +223,7 @@ export class CreateElements{
       return nav;
   }
 
-      handleNextPage(noPages,previousli,nextli,linkKey,apiMealsAreas,noOfLastPageElements,element){
-      const elementPagnation=Array.from(element.children).pop();
-      const  elementUl  =elementPagnation.children[0];
-      const  elementUlChildren  =Array.from(elementUl.children);
-      let activeElementIndex=self.getActivePage(elementUlChildren);
-      if(activeElementIndex){
-      const nextItemIndex =activeElementIndex+1;
-       const x=activeElementIndex*20;
-      if(noPages >= nextItemIndex ) {
-        elementUlChildren[activeElementIndex].classList.remove('active')
-        elementUlChildren[nextItemIndex].classList.add('active');
-        previousli.classList.remove('disabled');
-      if(noPages === nextItemIndex)  nextli.classList.add('disabled');
-      }  
-         element.innerHTML=''
-        let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,nextItemIndex,noPages,x);
-        if(linkKey !== 'meals'){ element.append(dFrag);} 
-      element.appendChild(elementPagnation); 
-      }
-      else {
-        console.log('No Active Element')
-      }
-      }
-
-      handlePreviousPage(noPages,previousli,nextli,linkKey,apiMealsAreas,noOfLastPageElements,element){
-        const elementPagnation=Array.from(element.children).pop();
-        const  elementUl  =elementPagnation.children[0];
-        const  elementUlChildren  =Array.from(elementUl.children);
-        let activeElementIndex=self.getActivePage(elementUlChildren);
-        if(activeElementIndex){
-        const previousItemIndex =activeElementIndex-1;
-         const x=(previousItemIndex-1)*20;
-        if(noPages >= activeElementIndex && activeElementIndex >=1 ) {
-          elementUlChildren[activeElementIndex].classList.remove('active')
-          elementUlChildren[previousItemIndex].classList.add('active');
-          nextli.classList.remove('disabled');
-        if(activeElementIndex === 2)  previousli.classList.add('disabled');
-        }  
-           element.innerHTML=''
-          let dFrag=self.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,previousItemIndex,noPages,x);
-          if(linkKey !== 'meals'){ element.append(dFrag);} 
-           element.appendChild(elementPagnation); 
-        }
-        else {
-          console.log('No Active Element')
-        }
-      }
-
-  
- 
-  
-  createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkKey,activePage){
+createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkKey,activePage){
     const active=(i === activePage)?'active':'';
      const li= this.createElement('li',{class:`page-item ${active} pages`,id:i});
      const link=this.createElement('a',{class:`page-link ${linkKey}`,href:'#'},i+1);
@@ -290,28 +239,41 @@ export class CreateElements{
      return li;
   }
 
-   getActivePage(allPages){
-    let previousActivePage=allPages.find(page => page.classList.contains('active'));
-    if(previousActivePage !== undefined)
-    return Number(previousActivePage.id)+1;
-    else 
-    return false;
+  handleNextPage(noPages,previousli,nextli,linkKey,apiMealsAreas,noOfLastPageElements,element){
+      let {activeElementIndex,elementUlChildren,elementPagnation}=getDataClass.getActivePage(element);
+      if(activeElementIndex){
+      const nextItemIndex =activeElementIndex+1;
+       const x=activeElementIndex*20;
+       elementUlChildren=general.setNext(nextItemIndex,activeElementIndex,noPages,elementUlChildren,nextli,previousli)
+      this.recreatePagnation(element,linkKey,apiMealsAreas,noOfLastPageElements,nextItemIndex,noPages,x,elementPagnation);
+      }
+      else {
+        console.log('No Active Element')
+      }
+      }
+
+  handlePreviousPage(noPages,previousli,nextli,linkKey,apiMealsAreas,noOfLastPageElements,element){
+        let {activeElementIndex,elementUlChildren,elementPagnation}=getDataClass.getActivePage(element);
+        if(activeElementIndex){
+          const previousItemIndex =activeElementIndex-1;
+          const x=(previousItemIndex-1)*20;
+          elementUlChildren=general.setPrevious(previousItemIndex,activeElementIndex,noPages,elementUlChildren,nextli,previousli);
+        this.recreatePagnation(element,linkKey,apiMealsAreas,noOfLastPageElements,previousItemIndex,noPages,x,elementPagnation);
+        }
+        else {console.log('No Active Element');}
+      }
+
+   recreatePagnation(element,linkKey,apiMealsAreas,noOfLastPageElements,index,noPages,x,elementPagnation){
+    element.innerHTML=''
+    let dFrag=this.pagnationKey(linkKey,apiMealsAreas,noOfLastPageElements,index,noPages,x);
+    if(linkKey !== 'meals'){ element.append(dFrag);} 
+     element.appendChild(elementPagnation); 
   }
 
-  getKey(linkKey){
-    let key;
-    switch(linkKey){
-      case 'area': key='area';break;
-      case 'category': key='category';break;
-      case 'ingredient': key='ingredient';break;
-      case 'meals': key='meals';break;
-      default : break;
-    }
-    return key;
-  }
+
   pagnationKey(linkKey,apiMeals,noOfLastPageElements,i,noPages,x){
     const dFrag = document.createDocumentFragment();
-    let key=this.getKey(linkKey);
+    let key=general.getKey(linkKey);
     let noElements=(i === noPages)?noOfLastPageElements:20;
     switch(key){
       case 'area':

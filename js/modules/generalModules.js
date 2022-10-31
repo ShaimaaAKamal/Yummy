@@ -58,8 +58,39 @@ export class General{
      return {noPages:obj.page,noOfLastPageElements:obj.remaining}
   }
    
+  setNext(nextItemIndex,activeElementIndex,noPages,elementUlChildren,nextli,previousli){
+   if(noPages >= nextItemIndex ) {
+     elementUlChildren[activeElementIndex].classList.remove('active')
+     elementUlChildren[nextItemIndex].classList.add('active');
+     previousli.classList.remove('disabled');
+   if(noPages === nextItemIndex)  nextli.classList.add('disabled');
+   }  
+   return elementUlChildren;
 
 
+ }
+
+setPrevious(previousItemIndex,activeElementIndex,noPages,elementUlChildren,nextli,previousli){
+   if(noPages >= activeElementIndex && activeElementIndex >=1 ) {
+     elementUlChildren[activeElementIndex].classList.remove('active')
+     elementUlChildren[previousItemIndex].classList.add('active');
+     nextli.classList.remove('disabled');
+   if(activeElementIndex === 2)  previousli.classList.add('disabled');
+     }
+     return elementUlChildren;
+       }
+
+ getKey(linkKey){
+         let key;
+         switch(linkKey){
+           case 'area': key='area';break;
+           case 'category': key='category';break;
+           case 'ingredient': key='ingredient';break;
+           case 'meals': key='meals';break;
+           default : break;
+         }
+         return key;
+       }
 
 
 }

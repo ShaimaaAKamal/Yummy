@@ -29,6 +29,22 @@ export class getData{
         }
         return mealIngredients;
       }
+
+    getActivePage(element){
+        const {elementUlChildren,elementPagnation}=this.getPagnationElement(element);
+        let previousActivePage=elementUlChildren.find(page => page.classList.contains('active'));
+        if(previousActivePage !== undefined)
+        return {activeElementIndex:Number(previousActivePage.id)+1,elementUlChildren,elementPagnation};
+        else 
+        return false;
+      }
+      
+      getPagnationElement(element){
+        const elementPagnation=Array.from(element.children).pop();
+        const  elementUl  =elementPagnation.children[0];
+        const  elementUlChildren  =Array.from(elementUl.children);
+        return {elementUlChildren,elementPagnation};
+      }
    
       
     
