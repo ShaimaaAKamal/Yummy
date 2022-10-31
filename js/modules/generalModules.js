@@ -60,10 +60,16 @@ export class General{
    
   setNext(nextItemIndex,activeElementIndex,noPages,elementUlChildren,nextli,previousli){
    if(noPages >= nextItemIndex ) {
+      const displayedLinks=(noPages <=2)?noPages:2;
+      if(activeElementIndex >=displayedLinks && activeElementIndex < noPages){
+             elementUlChildren[activeElementIndex-1].classList.add('d-none');
+               elementUlChildren[activeElementIndex+1].classList.remove('d-none');
+          }
      elementUlChildren[activeElementIndex].classList.remove('active')
      elementUlChildren[nextItemIndex].classList.add('active');
      previousli.classList.remove('disabled');
-   if(noPages === nextItemIndex)  nextli.classList.add('disabled');
+      if(noPages === nextItemIndex)  nextli.classList.add('disabled');
+  
    }  
    return elementUlChildren;
 

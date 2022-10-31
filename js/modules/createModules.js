@@ -207,8 +207,11 @@ export class CreateElements{
       let x=0;
       previousli.appendChild(previouslink);
       ul.appendChild(previousli);
+      const displayedLinks=(noPages <= 2)?noPages:2;
       for(let i=0 ; i<noPages ; i++){
-          ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key,activePage));
+        (i < displayedLinks)?
+          ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key,activePage,'')):
+          ul.appendChild(this.createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,key,activePage,'d-none'));
           x+=20; 
       }
       const nextDisabled=(activePage === noPages-1) ? 'disabled':'';
@@ -223,9 +226,9 @@ export class CreateElements{
       return nav;
   }
 
-createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkKey,activePage){
+createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkKey,activePage,display){
     const active=(i === activePage)?'active':'';
-     const li= this.createElement('li',{class:`page-item ${active} pages`,id:i});
+     const li= this.createElement('li',{class:`page-item ${active} pages ${display}`,id:i});
      const link=this.createElement('a',{class:`page-link ${linkKey}`,href:'#'},i+1);
      li.appendChild(link);
      self=this
@@ -245,7 +248,7 @@ createPagnationLink(i,element,apiMealsAreas,noPages,noOfLastPageElements,x,linkK
       const nextItemIndex =activeElementIndex+1;
        const x=activeElementIndex*20;
        elementUlChildren=general.setNext(nextItemIndex,activeElementIndex,noPages,elementUlChildren,nextli,previousli)
-      this.recreatePagnation(element,linkKey,apiMealsAreas,noOfLastPageElements,nextItemIndex,noPages,x,elementPagnation);
+       this.recreatePagnation(element,linkKey,apiMealsAreas,noOfLastPageElements,nextItemIndex,noPages,x,elementPagnation);
       }
       else {
         console.log('No Active Element')
